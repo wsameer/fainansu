@@ -2,6 +2,10 @@
   "name": "fainansu",
   "version": "0.0.1",
   "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "dev": "turbo dev",
     "dev:api": "pnpm --filter=api dev",
