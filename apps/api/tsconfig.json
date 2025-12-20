@@ -9,6 +9,10 @@
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
     "outDir": "./dist",
+    "baseUrl": ".",
+    "paths": {
+      "@workspace/types": ["../../packages/types/src/index.ts"],
+    },
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["node_modules"],
