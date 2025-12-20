@@ -1,76 +1,100 @@
 # syntax=docker/dockerfile:1
 
-# Comments are provided throughout this file to help you get started.
-# If you need more help, visit the Dockerfile reference guide at
-# https://docs.docker.com/go/dockerfile-reference/
-
-# Want to help us make this template better? Share your feedback here: https://forms.gle/ybq9Krt8jtBL3iCk7
+# Production Dockerfile for Fainansu Turbo Monorepo
+# This builds both the web (React + Vite) and api (Hono.js) apps
 
 ARG NODE_VERSION=24.11.0
-ARG PNPM_VERSION=10.4.1
 
 ################################################################################
-# Use node image for base image for all stages.
-FROM node:${NODE_VERSION}-alpine as base
+# Base stage - Setup pnpm
+################################################################################
+FROM node:${NODE_VERSION}-alpine AS base
 
-# Set working directory for all build stages.
-WORKDIR /usr/src/app
+# Install pnpm with explicit version
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
 
-# Install pnpm.
-RUN --mount=type=cache,target=/root/.npm \
-    npm install -g pnpm@${PNPM_VERSION}
+# Set working directory
+WORKDIR /app
 
 ################################################################################
-# Create a stage for installing production dependecies.
-FROM base as deps
-
-# Download dependencies as a separate step to take advantage of Docker's caching.
-# Leverage a cache mount to /root/.local/share/pnpm/store to speed up subsequent builds.
-# Leverage bind mounts to package.json and pnpm-lock.yaml to avoid having to copy them
-# into this layer.
-RUN --mount=type=bind,source=package.json,target=package.json \
-    --mount=type=bind,source=pnpm-lock.yaml,target=pnpm-lock.yaml \
-    --mount=type=cache,target=/root/.local/share/pnpm/store \
-    pnpm install --prod --frozen-lockfile
-
+# Pruner stage - Extract only necessary workspace files
 ################################################################################
-# Create a stage for building the application.
-FROM deps as build
+FROM base AS pruner
 
-# Download additional development dependencies before building, as some projects require
-# "devDependencies" to be installed to build. If you don't need this, remove this step.
-RUN --mount=type=bind,source=package.json,target=package.json \
-    --mount=type=bind,source=pnpm-lock.yaml,target=pnpm-lock.yaml \
-    --mount=type=cache,target=/root/.local/share/pnpm/store \
-    pnpm install --frozen-lockfile
-
-# Copy the rest of the source files into the image.
 COPY . .
-# Run the build script.
-RUN pnpm run build
+
+# Prune the workspace for the apps we want to build
+# This creates a minimal workspace with only the necessary dependencies
+# Using pnpm dlx to download and execute turbo without global install
+RUN pnpm dlx turbo@2.6.3 prune web api --docker
 
 ################################################################################
-# Create a new stage to run the application with minimal runtime dependencies
-# where the necessary files are copied from the build stage.
-FROM base as final
+# Installer stage - Install dependencies
+################################################################################
+FROM base AS installer
 
-# Use production node environment by default.
-ENV NODE_ENV production
+# Copy pruned lockfile and package.json files
+COPY --from=pruner /app/out/json/ .
+COPY --from=pruner /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
+COPY --from=pruner /app/out/pnpm-workspace.yaml ./pnpm-workspace.yaml
 
-# Run the application as a non-root user.
-USER node
+# Install dependencies (including devDependencies for build)
+RUN --mount=type=cache,target=/root/.local/share/pnpm/store \
+  pnpm install --frozen-lockfile
 
-# Copy package.json so that package manager commands can be used.
-COPY package.json .
+# Copy pruned source code
+COPY --from=pruner /app/out/full/ .
+COPY turbo.json turbo.json
 
-# Copy the production dependencies from the deps stage and also
-# the built application from the build stage into the image.
-COPY --from=deps /usr/src/app/node_modules ./node_modules
-COPY --from=build /usr/src/app/dist ./dist
+# Build all apps and packages
+# Using turbo from devDependencies installed via pnpm install
+RUN pnpm turbo build
 
+################################################################################
+# Runner stage - Production runtime with minimal footprint
+################################################################################
+FROM node:${NODE_VERSION}-alpine AS runner
 
-# Expose the port that the application listens on.
+ARG NODE_VERSION=24.11.0
+
+# Install pnpm with explicit version
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+
+WORKDIR /app
+
+# Don't run production as root
+RUN addgroup --system --gid 1001 nodejs && \
+  adduser --system --uid 1001 hono
+
+# Set to production environment
+ENV NODE_ENV=production
+
+# Copy necessary files from installer
+COPY --from=installer /app/package.json ./package.json
+COPY --from=installer /app/pnpm-workspace.yaml ./pnpm-workspace.yaml
+COPY --from=installer /app/pnpm-lock.yaml ./pnpm-lock.yaml
+
+# Copy built applications
+COPY --from=installer --chown=hono:nodejs /app/apps/api/dist ./apps/api/dist
+COPY --from=installer --chown=hono:nodejs /app/apps/api/package.json ./apps/api/package.json
+COPY --from=installer --chown=hono:nodejs /app/apps/web/dist ./apps/web/dist
+COPY --from=installer --chown=hono:nodejs /app/apps/web/package.json ./apps/web/package.json
+
+# Copy workspace packages
+COPY --from=installer --chown=hono:nodejs /app/packages ./packages
+
+# Install only production dependencies
+RUN --mount=type=cache,target=/root/.local/share/pnpm/store \
+  pnpm install --prod --frozen-lockfile
+
+USER hono
+
+# Expose the API port
 EXPOSE 3001
 
-# Run the application.
-CMD pnpm --filter=api start
+# Start the API server (which will also serve the web app static files)
+CMD ["pnpm", "--filter=api", "start"]
