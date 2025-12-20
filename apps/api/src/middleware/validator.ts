@@ -1,6 +1,5 @@
 import type { MiddlewareHandler } from "hono";
 import { validator } from "hono/validator";
-import type { z } from "zod";
 
 /**
  * Validation middleware factory for Hono
@@ -9,6 +8,7 @@ import type { z } from "zod";
 
 type ValidationTarget = "json" | "query" | "param";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function validate(target: ValidationTarget, schema: any) {
   return validator(target, (value, c) => {
     const result = schema.safeParse(value);
@@ -36,9 +36,9 @@ export function validate(target: ValidationTarget, schema: any) {
  * Usage: validateRequest({ json: SomeSchema, query: QuerySchema })
  */
 export function validateRequest(schemas: {
-  json?: any;
-  query?: any;
-  param?: any;
+  json?: unknown;
+  query?: unknown;
+  param?: unknown;
 }): MiddlewareHandler[] {
   const middlewares: MiddlewareHandler[] = [];
 

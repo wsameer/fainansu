@@ -2,23 +2,25 @@
   "name": "fainansu",
   "version": "0.0.1",
   "private": true,
+  "type": "module",
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
   "scripts": {
-    "dev": "turbo dev",
+    "dev": "turbo run dev",
     "dev:api": "pnpm --filter=api dev",
     "dev:web": "pnpm --filter=web dev",
-    "build": "turbo build",
+    "build": "turbo run build",
     "build:api": "pnpm --filter=api build",
     "build:web": "pnpm --filter=web build",
     "start": "pnpm --filter=api start",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint:fix",
     "clean": "turbo clean && rm -rf node_modules .turbo",
-    "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,md,json}\"",
-    "check-types": "turbo check-types"
+    "check-types": "turbo run check-types"
   },
   "devDependencies": {
     "@workspace/eslint-config": "workspace:*",

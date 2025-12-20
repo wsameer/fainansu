@@ -40,7 +40,7 @@ if (env.NODE_ENV === "production") {
   const webDistPath = join(process.cwd(), "..", "web", "dist");
 
   if (existsSync(webDistPath)) {
-    logger.log(`Serving static files from: ${webDistPath}`);
+    logger.info(`Serving static files from: ${webDistPath}`);
 
     // Serve static assets
     app.use("/*", serveStatic({ root: webDistPath }));

@@ -1,10 +1,10 @@
-import { config as reactConfig } from "@workspace/eslint-config/react-internal";
+import { config as baseConfig } from "@workspace/eslint-config/base";
 
 export default [
-  ...reactConfig,
+  ...baseConfig,
 
   {
-    files: ["**/*.ts", "**/*.tsx"],
+    files: ["**/*.ts", "**/*.d.ts"],
     languageOptions: {
       parserOptions: {
         project: "./tsconfig.json",
@@ -13,7 +13,6 @@ export default [
     },
   },
 
-  // Ignore build artifacts
   {
     ignores: ["dist/**", "node_modules/**", ".turbo/**"],
   },
