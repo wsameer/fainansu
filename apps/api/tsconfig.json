@@ -1,6 +1,7 @@
 {
   "extends": "@workspace/typescript-config/nodejs.json",
   "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.tsbuildinfo",
     "module": "NodeNext",
     "moduleResolution": "nodenext",
     "sourceMap": true,
