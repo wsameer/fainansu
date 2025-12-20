@@ -1,12 +1,18 @@
 {
-  "baseUrl": ".",
-  "paths": {
-    "@/*": ["src/*"],
-    "@workspace/ui/*": ["../../packages/ui/src/*"],
-  },
   "files": [],
   "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" },
+    {
+      "path": "./tsconfig.app.json",
+    },
+    {
+      "path": "./tsconfig.node.json",
+    },
   ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"],
+      "@workspace/ui/*": ["../../packages/ui/src/*"],
+    },
+  },
 }

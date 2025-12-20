@@ -1,8 +1,8 @@
-import path from "path";
 import { VitePWA } from "vite-plugin-pwa";
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import path from "path";
 import tailwindcss from "@tailwindcss/vite";
+import react from "@vitejs/plugin-react";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -42,14 +42,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
-    },
-  },
-  server: {
-    proxy: {
-      "/api": {
-        target: "http://localhost:3001",
-        changeOrigin: true,
-      },
+      "@workspace/ui": path.resolve(__dirname, "../../packages/ui/src"),
     },
   },
 });
