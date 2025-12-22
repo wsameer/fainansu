@@ -1,5 +1,5 @@
-import { Hono } from "hono";
 import type { HealthCheck } from "@workspace/types";
+import { Hono } from "hono";
 
 const health = new Hono();
 
