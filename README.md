@@ -114,7 +114,7 @@ pnpm docker:up
 3. **Set up database** (first time only):
 ```bash
 # Access the app container
-docker exec -it privfinos-app sh
+docker exec -it fainansu-app sh
 
 # Push schema and seed data
 pnpm db:push
