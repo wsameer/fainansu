@@ -6,7 +6,7 @@ export class AppError extends Error {
   constructor(
     public statusCode: AppStatusCode,
     message: string,
-    public code?: string,
+    public code?: string
   ) {
     super(message);
     this.name = "AppError";
@@ -62,6 +62,6 @@ export function toHTTPException(error: AppError): HTTPException {
     {
       message: error.message,
       cause: error,
-    },
+    }
   );
 }

@@ -17,6 +17,6 @@ export async function requestLogger(c: Context, next: Next) {
       status,
       duration,
     },
-    "Request completed",
+    "Request completed"
   );
 }

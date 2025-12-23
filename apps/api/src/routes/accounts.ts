@@ -89,7 +89,7 @@ app.post("/", validate("json", InsertAccountSchema), async (c) => {
       success: true,
       data: newAccount,
     },
-    201,
+    201
   );
 });
 
@@ -110,7 +110,7 @@ app.put(
       success: true,
       data: updatedAccount,
     });
-  },
+  }
 );
 
 /**

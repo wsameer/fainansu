@@ -23,7 +23,7 @@ app.use(
   cors({
     origin: env.CORS_ORIGIN.split(","),
     credentials: true,
-  }),
+  })
 );
 
 // API Routes (must come before static file serving)
@@ -66,7 +66,7 @@ app.notFound((c) => {
         code: "NOT_FOUND",
       },
     },
-    404,
+    404
   );
 });
 
@@ -84,5 +84,5 @@ serve(
   (info) => {
     logger.info(`Server is running on http://localhost:${info.port}/api`);
     logger.info(`Environment: ${env.NODE_ENV}`);
-  },
+  }
 );

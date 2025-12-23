@@ -62,7 +62,7 @@ app.post("/", validate("json", InsertCategorySchema), async (c) => {
       success: true,
       data: newCategory,
     },
-    201,
+    201
   );
 });
 
@@ -83,7 +83,7 @@ app.put(
       success: true,
       data: updatedCategory,
     });
-  },
+  }
 );
 
 /**

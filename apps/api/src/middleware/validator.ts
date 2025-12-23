@@ -23,7 +23,7 @@ export function validate(target: ValidationTarget, schema: any) {
             details: result.error.issues,
           },
         },
-        400,
+        400
       );
     }
 

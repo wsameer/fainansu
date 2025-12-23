@@ -18,7 +18,7 @@ export function errorHandler(err: Error, c: Context) {
           details: err.issues,
         },
       },
-      400,
+      400
     );
   }
 
@@ -32,7 +32,7 @@ export function errorHandler(err: Error, c: Context) {
           code: err.code,
         },
       },
-      err.statusCode,
+      err.statusCode
     );
   }
 
@@ -45,7 +45,7 @@ export function errorHandler(err: Error, c: Context) {
           message: err.message,
         },
       },
-      err.status,
+      err.status
     );
   }
 
@@ -58,6 +58,6 @@ export function errorHandler(err: Error, c: Context) {
         code: "INTERNAL_ERROR",
       },
     },
-    500,
+    500
   );
 }

@@ -96,7 +96,7 @@ export class CategoriesService {
         throw new AppError(
           400,
           "Category cannot be its own parent",
-          "INVALID_PARENT",
+          "INVALID_PARENT"
         );
       }
       await this.getById(data.parentId);
