@@ -7,7 +7,10 @@
     "start": "node dist/index.js",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json}\"",
+    "format:check": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json}\"",
+    "clean": "rm -rf dist"
   },
   "dependencies": {
     "@hono/node-server": "^1.19.6",
@@ -21,6 +24,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.11.17",
+    "@workspace/eslint-config": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
     "tsx": "^4.7.1",
     "typescript": "^5.9.3"

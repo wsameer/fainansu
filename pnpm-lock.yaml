@@ -64,6 +64,9 @@ importers:
       '@types/node':
         specifier: ^20.11.17
         version: 20.19.9
+      '@workspace/eslint-config':
+        specifier: workspace:*
+        version: link:../../packages/eslint-config
       '@workspace/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
