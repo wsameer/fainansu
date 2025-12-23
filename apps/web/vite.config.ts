@@ -3,12 +3,17 @@ import { defineConfig } from "vite";
 import path from "path";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
+import { tanstackRouter } from "@tanstack/router-plugin/vite";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    react(),
     tailwindcss(),
+    tanstackRouter({
+      target: "react",
+      autoCodeSplitting: true,
+    }),
+    react(),
     VitePWA({
       registerType: "prompt",
       injectRegister: false,
@@ -43,6 +48,16 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "./src"),
       "@workspace/ui": path.resolve(__dirname, "../../packages/ui/src"),
+    },
+  },
+  server: {
+    port: 5173,
+    proxy: {
+      // Proxy API requests to your Hono backend during development
+      "/api": {
+        target: "http://localhost:3000",
+        changeOrigin: true,
+      },
     },
   },
 });
