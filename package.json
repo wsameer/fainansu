@@ -18,8 +18,9 @@
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint:fix",
     "clean": "turbo clean && rm -rf node_modules .turbo",
-    "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
-    "format:check": "prettier --check \"**/*.{ts,tsx,md,json}\"",
+    "clean:full": "turbo run clean && rm -rf node_modules .turbo",
+    "format": "turbo run format",
+    "format:check": "turbo run format:check",
     "check-types": "turbo run check-types",
     "db:generate": "pnpm --filter=@workspace/db db:generate",
     "db:push": "pnpm --filter=@workspace/db db:push",
@@ -36,6 +37,8 @@
   "devDependencies": {
     "@workspace/eslint-config": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
+    "eslint-config-turbo": "^2.7.1",
+    "eslint-plugin-turbo": "^2.5.5",
     "prettier": "^3.7.4",
     "turbo": "^2.6.3",
     "typescript": "5.9.3"
