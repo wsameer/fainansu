@@ -1,4 +1,3 @@
-import { useLayout } from "./layout-provider";
 import { Card } from "@workspace/ui/components/card";
 import {
   Avatar,
@@ -6,6 +5,7 @@ import {
   AvatarImage,
 } from "@workspace/ui/components/avatar";
 import { DollarSignIcon, TrendingDownIcon, TrendingUpIcon } from "lucide-react";
+import { useLayout } from "./layout/layout-provider";
 
 export function RightAside() {
   const { showRightAside } = useLayout();

@@ -1,12 +1,4 @@
-import { useLayoutConfig } from "@/components/layout-provider";
-import { DASHBOARD_ROUTE } from "@/constants";
 import { createFileRoute } from "@tanstack/react-router";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@workspace/ui/components/card";
 import {
   ActivityIcon,
   CreditCardIcon,
@@ -14,14 +6,24 @@ import {
   TrendingUpIcon,
 } from "lucide-react";
 
+import { useLayoutConfig } from "@/components/layout/useLayoutConfig";
+import { DASHBOARD_ROUTE } from "@/constants";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@workspace/ui/components/card";
+
 export const Route = createFileRoute(DASHBOARD_ROUTE)({
   component: DashboardPage,
 });
 
 function DashboardPage() {
   useLayoutConfig({
-    title: "Fainansu",
+    title: "Fainansu - Dashboard",
   });
+
   return (
     <div className="p-4 md:p-6 lg:p-8 space-y-6">
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">

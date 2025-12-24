@@ -1,5 +1,4 @@
-import { type PropsWithChildren } from "react";
-import { ErrorBoundary as ReactErrorBoundary } from "react-error-boundary";
+import { Component, type PropsWithChildren, type ReactNode } from "react";
 import { Button } from "@workspace/ui/components/button";
 
 interface ErrorFallbackProps {
@@ -15,13 +14,11 @@ function ErrorFallback({ error, resetErrorBoundary }: ErrorFallbackProps) {
           <h1 className="text-4xl font-bold text-destructive">Oops!</h1>
           <h2 className="text-xl font-semibold">Something went wrong</h2>
         </div>
-
         <div className="p-4 bg-muted rounded-lg">
           <p className="text-sm text-muted-foreground wrap-break-words">
             {error.message || "An unexpected error occurred"}
           </p>
         </div>
-
         <div className="flex flex-col gap-2">
           <Button onClick={resetErrorBoundary} className="w-full">
             Try again
@@ -39,18 +36,46 @@ function ErrorFallback({ error, resetErrorBoundary }: ErrorFallbackProps) {
   );
 }
 
-export function GlobalErrorBoundary({ children }: PropsWithChildren) {
-  return (
-    <ReactErrorBoundary
-      FallbackComponent={ErrorFallback}
-      onReset={() => {
-        // Reset app state here if needed
-        window.location.href = "/";
-      }}
-    >
-      {children}
-    </ReactErrorBoundary>
-  );
+interface Props extends PropsWithChildren {
+  onReset?: () => void;
+}
+
+interface State {
+  hasError: boolean;
+  error: Error | null;
+}
+
+export class GlobalErrorBoundary extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+
+  static getDerivedStateFromError(error: Error): State {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    console.error("Error boundary caught:", error, errorInfo);
+  }
+
+  resetErrorBoundary = () => {
+    this.setState({ hasError: false, error: null });
+    this.props.onReset?.();
+  };
+
+  render(): ReactNode {
+    if (this.state.hasError && this.state.error) {
+      return (
+        <ErrorFallback
+          error={this.state.error}
+          resetErrorBoundary={this.resetErrorBoundary}
+        />
+      );
+    }
+
+    return this.props.children;
+  }
 }
 
 // Route-specific error boundary for TanStack Router

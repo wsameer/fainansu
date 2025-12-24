@@ -1,7 +1,8 @@
 import { BellIcon, SearchIcon, SettingsIcon } from "lucide-react";
-import { useLayout } from "./layout-provider";
 import { Input } from "@workspace/ui/components/input";
 import { Button } from "@workspace/ui/components/button";
+
+import { useLayout } from "./layout/layout-provider";
 
 export function Header() {
   const { headerTitle, headerActions } = useLayout();

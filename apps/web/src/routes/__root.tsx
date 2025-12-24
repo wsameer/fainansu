@@ -2,12 +2,14 @@ import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import type { QueryClient } from "@tanstack/react-query";
 
-import { RouteErrorBoundary } from "../components/error-boundary";
-import { NotFoundComponent } from "./404";
-import { LayoutProvider } from "@/components/layout-provider";
 import { Header } from "@/components/header";
 import { Sidebar } from "@/components/sidebar";
 import { RightAside } from "@/components/right-aside";
+import { AppBottomBar } from "@/components/navigation/app-bottom-bar";
+import { LayoutProvider } from "@/components/layout/layout-provider";
+
+import { RouteErrorBoundary } from "../components/error-boundary";
+import { NotFoundComponent } from "./404";
 
 interface RouterContext {
   queryClient: QueryClient;
@@ -34,6 +36,8 @@ function RootComponent() {
           <main className="row-start-2 col-start-1 md:col-start-2 lg:col-start-2 overflow-y-auto">
             <Outlet />
           </main>
+
+          <AppBottomBar />
 
           {/* Right Aside - hidden on mobile and tablet */}
           <RightAside />

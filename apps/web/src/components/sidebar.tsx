@@ -35,7 +35,6 @@ export function Sidebar() {
 
 function SidebarLink({ item }: { item: (typeof navItems)[0] }) {
   const router = useRouterState();
-  console.log({ router });
   const pathname = router.location.pathname;
   const isActive = pathname === item.href;
 

@@ -18,7 +18,7 @@ import {
   DASHBOARD_ROUTE,
   SETTINGS_ROUTE,
   TRANSACTIONS_ROUTE,
-} from "@/routes/constant";
+} from "@/constants";
 
 const PRIMARY_NAV = [
   { icon: HouseIcon, label: "Home", path: DASHBOARD_ROUTE },
@@ -31,7 +31,7 @@ const PRIMARY_NAV = [
   { icon: Settings2, label: "Settings", path: SETTINGS_ROUTE },
 ].filter(Boolean) as SideNavigationItem[];
 
-export function MobileNav() {
+export function AppBottomBar() {
   const router = useRouterState();
   const navigate = useNavigate();
   const currentPath = router.location.pathname;
