@@ -43,9 +43,9 @@ function RootComponent() {
           <RightAside />
         </div>
       </LayoutProvider>
-      {import.meta.env.DEV && (
+      {/*{import.meta.env.DEV && (
         <TanStackRouterDevtools initialIsOpen={false} position="bottom-right" />
-      )}
+      )}*/}
     </>
   );
 }
