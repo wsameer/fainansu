@@ -14,6 +14,7 @@ export function App() {
     <GlobalErrorBoundary>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+          // SidebarProvider
           <React.Suspense fallback={<AppLoader />}>
             <RouterProvider router={router} />
             <Toaster />
