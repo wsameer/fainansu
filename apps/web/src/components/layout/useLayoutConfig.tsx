@@ -2,6 +2,7 @@ import { useEffect, useRef, type ReactNode } from "react";
 import { useLayout } from "./layout-provider";
 
 // Hook to set layout config from pages
+// @deprecated Do not use this
 export function useLayoutConfig(config: {
   title?: string;
   actions?: ReactNode;

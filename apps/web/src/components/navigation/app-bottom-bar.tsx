@@ -35,13 +35,13 @@ export function AppBottomBar() {
   const router = useRouterState();
   const navigate = useNavigate();
   const currentPath = router.location.pathname;
-  console.log(currentPath);
+  const lastNavItem = PRIMARY_NAV[PRIMARY_NAV.length - 1];
   const navRef = useRef(null);
 
   return (
     <div
       ref={navRef}
-      className="md:hidden fixed bottom-8 left-1/2 w-3/4 -translate-x-1/2 z-50 transition-transform duration-200 ease-in-out"
+      className="sm:hidden fixed bottom-8 left-1/2 w-3/4 -translate-x-1/2 z-50 transition-transform duration-200 ease-in-out"
       id="app-bottom-bar"
     >
       <nav className="flex items-center justify-between rounded-full bg-zinc-800 dark:bg-zinc-200 p-2 shadow-lg">
@@ -65,18 +65,15 @@ export function AppBottomBar() {
             </React.Fragment>
           );
         })}
-        <NavItem
-          icon={<Settings2 />}
-          isActive={location.pathname.includes(
-            PRIMARY_NAV[PRIMARY_NAV.length - 1].path
-          )}
-          label={PRIMARY_NAV[PRIMARY_NAV.length - 1].label}
-          onClick={() =>
-            navigate(
-              linkOptions({ to: PRIMARY_NAV[PRIMARY_NAV.length - 1].path })
-            )
-          }
-        />
+
+        {lastNavItem && (
+          <NavItem
+            icon={<Settings2 />}
+            isActive={location.pathname.includes(lastNavItem.path)}
+            label={lastNavItem.label}
+            onClick={() => navigate(linkOptions({ to: lastNavItem.path }))}
+          />
+        )}
       </nav>
     </div>
   );
