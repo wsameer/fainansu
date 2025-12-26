@@ -14,15 +14,20 @@ import {
   CardHeader,
   CardTitle,
 } from "@workspace/ui/components/card";
+import { useLayoutConfig } from "@/components/layout/layout-provider";
 
 export const Route = createFileRoute(DASHBOARD_ROUTE)({
-  component: DashboardPage,
+  component: RouteComponent,
 });
 
-function DashboardPage() {
+function RouteComponent() {
+  useLayoutConfig({
+    title: "Dashboard",
+  });
+
   return (
     <div className="flex flex-1 flex-col gap-4 p-4">
-      {Array.from({ length: 24 }).map((_, index) => (
+      {Array.from({ length: 8 }).map((_, index) => (
         <div
           key={index}
           className="bg-muted/50 aspect-video h-12 w-full rounded-lg"

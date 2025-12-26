@@ -14,6 +14,10 @@ import { SidebarLeft } from "@/components/layout/sidebar-left";
 import { RouteErrorBoundary } from "../components/error-boundary";
 import { NotFoundComponent } from "./404";
 import { SidebarRight } from "@/components/layout/sidebar-right";
+import { Button } from "@workspace/ui/components/button";
+import { BellIcon, SettingsIcon } from "lucide-react";
+import { Header } from "@/components/layout/header";
+import { LayoutProvider } from "@/components/layout/layout-provider";
 
 interface RouterContext {
   queryClient: QueryClient;
@@ -29,34 +33,31 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 function RootComponent() {
   return (
     <>
-      <SidebarProvider
-        style={
-          {
-            "--sidebar-width": "350px",
-          } as React.CSSProperties
-        }
-      >
-        <SidebarLeft />
-        <SidebarInset>
-          <header className="bg-background sticky top-0 hidden sm:flex shrink-0 h-14 items-center gap-2 border-b p-4">
-            <div className="flex flex-1 items-center gap-2 px-3">
-              <SidebarTrigger className="-ml-1" />
-              <Separator
-                orientation="vertical"
-                className="mr-2 data-[orientation=vertical]:h-4"
-              />
+      <LayoutProvider>
+        <SidebarProvider
+          style={
+            {
+              "--sidebar-width": "350px",
+            } as React.CSSProperties
+          }
+        >
+          <SidebarLeft />
+          <SidebarInset>
+            <Header />
+            <div className="flex flex-1 flex-col gap-4 p-4">
+              <Outlet />
             </div>
-          </header>
-          <div className="flex flex-1 flex-col gap-4 p-4">
-            <Outlet />
-          </div>
-        </SidebarInset>
-        <AppBottomBar />
-        <SidebarRight />
-      </SidebarProvider>
-      {import.meta.env.DEV && (
-        <TanStackRouterDevtools initialIsOpen={false} position="bottom-right" />
-      )}
+          </SidebarInset>
+          <AppBottomBar />
+          <SidebarRight />
+        </SidebarProvider>
+        {import.meta.env.DEV && (
+          <TanStackRouterDevtools
+            initialIsOpen={false}
+            position="bottom-right"
+          />
+        )}
+      </LayoutProvider>
     </>
   );
 }
