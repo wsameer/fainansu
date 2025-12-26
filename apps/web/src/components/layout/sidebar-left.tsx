@@ -14,7 +14,7 @@ import {
 
 import { Label } from "@workspace/ui/components/label";
 import { Switch } from "@workspace/ui/components/switch";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   ArchiveXIcon,
   CommandIcon,
@@ -24,6 +24,15 @@ import {
   Trash2Icon,
 } from "lucide-react";
 import { NavUser } from "../navigation/nav-user";
+import { PRIMARY_NAV_OPTIONS } from "../navigation/constants";
+import {
+  Link,
+  linkOptions,
+  useNavigate,
+  useRouterState,
+} from "@tanstack/react-router";
+import { useLayout } from "./layout-provider";
+import { cn } from "@workspace/ui/lib/utils";
 
 // This is sample data
 const data = {
@@ -151,15 +160,16 @@ const data = {
 export const SidebarLeft = ({
   ...props
 }: React.ComponentProps<typeof Sidebar>) => {
-  // Note: I'm using state to show active item.
-  // IRL you should use the url/router.
-  const [activeItem, setActiveItem] = useState(data.navMain[0]);
-  const [mails, setMails] = useState(data.mails);
-  const { setOpen } = useSidebar();
+  const { headerTitle } = useLayout();
+  const router = useRouterState();
+  const navRef = useRef(null);
+
+  const currentPath = router.location.pathname;
 
   return (
     <Sidebar
       collapsible="icon"
+      ref={navRef}
       className="overflow-hidden *:data-[sidebar=sidebar]:flex-row"
       {...props}
     >
@@ -191,29 +201,21 @@ export const SidebarLeft = ({
           <SidebarGroup>
             <SidebarGroupContent className="px-1.5 md:px-0">
               <SidebarMenu>
-                {data.navMain.map((item) => (
-                  <SidebarMenuItem key={item.title}>
+                {PRIMARY_NAV_OPTIONS.map((item) => (
+                  <SidebarMenuItem key={item.path}>
                     <SidebarMenuButton
                       tooltip={{
                         children: item.title,
                         hidden: false,
                       }}
-                      onClick={() => {
-                        setActiveItem(item);
-                        const mail = data.mails.sort(() => Math.random() - 0.5);
-                        setMails(
-                          mail.slice(
-                            0,
-                            Math.max(5, Math.floor(Math.random() * 10) + 1)
-                          )
-                        );
-                        setOpen(true);
-                      }}
-                      isActive={activeItem?.title === item.title}
+                      asChild
+                      isActive={currentPath === item.path}
                       className="px-2.5 md:px-2"
                     >
-                      <item.icon />
-                      <span>{item.title}</span>
+                      <Link to={item.path}>
+                        <item.icon />
+                        <span>{item.title}</span>
+                      </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}
@@ -232,7 +234,7 @@ export const SidebarLeft = ({
         <SidebarHeader className="gap-3.5 border-b p-4">
           <div className="flex w-full items-center justify-between">
             <div className="text-foreground text-base font-medium">
-              {activeItem?.title}
+              {headerTitle}
             </div>
             <Label className="flex items-center gap-2 text-sm">
               <span>Unreads</span>
@@ -243,24 +245,7 @@ export const SidebarLeft = ({
         </SidebarHeader>
         <SidebarContent>
           <SidebarGroup className="px-0">
-            <SidebarGroupContent>
-              {mails.map((mail) => (
-                <a
-                  href="#"
-                  key={mail.email}
-                  className="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground flex flex-col items-start gap-2 border-b p-4 text-sm leading-tight whitespace-nowrap last:border-b-0"
-                >
-                  <div className="flex w-full items-center gap-2">
-                    <span>{mail.name}</span>{" "}
-                    <span className="ml-auto text-xs">{mail.date}</span>
-                  </div>
-                  <span className="font-medium">{mail.subject}</span>
-                  <span className="line-clamp-2 w-65 text-xs whitespace-break-spaces">
-                    {mail.teaser}
-                  </span>
-                </a>
-              ))}
-            </SidebarGroupContent>
+            <SidebarGroupContent>Hello!</SidebarGroupContent>
           </SidebarGroup>
         </SidebarContent>
       </Sidebar>
