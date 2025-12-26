@@ -1,6 +1,8 @@
 import {
   createContext,
   useContext,
+  useEffect,
+  useRef,
   useState,
   type PropsWithChildren,
   type ReactNode,
@@ -18,7 +20,7 @@ type LayoutContextType = {
 const LayoutContext = createContext<LayoutContextType | undefined>(undefined);
 
 export function LayoutProvider({ children }: PropsWithChildren) {
-  const [headerTitle, setHeaderTitle] = useState("ExpenseHub");
+  const [headerTitle, setHeaderTitle] = useState("Dashboard");
   const [headerActions, setHeaderActions] = useState<ReactNode | null>(null);
   const [showRightAside, setShowRightAside] = useState(true);
 
@@ -45,4 +47,50 @@ export function useLayout() {
     throw new Error("useLayout must be used within a LayoutProvider");
   }
   return context;
+}
+
+// Hook to set layout config from pages
+// eslint-disable-next-line -- exception
+export function useLayoutConfig(config: {
+  title?: string;
+  actions?: ReactNode;
+  showRightAside?: boolean;
+}) {
+  const { setHeaderTitle, setHeaderActions, setShowRightAside } = useLayout();
+  const isInitialMount = useRef(true);
+
+  useEffect(() => {
+    // Set initial config
+    if (config.title !== undefined) {
+      setHeaderTitle(config.title);
+    }
+    if (config.actions !== undefined) {
+      setHeaderActions(config.actions);
+    }
+    if (config.showRightAside !== undefined) {
+      setShowRightAside(config.showRightAside);
+    }
+
+    isInitialMount.current = false;
+
+    // Cleanup on unmount
+    return () => {
+      setHeaderTitle("Dashboard");
+      setHeaderActions(null);
+      setShowRightAside(true);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (!isInitialMount.current && config.title !== undefined) {
+      setHeaderTitle(config.title);
+    }
+  }, [config.title, setHeaderTitle]);
+
+  useEffect(() => {
+    if (!isInitialMount.current && config.showRightAside !== undefined) {
+      setShowRightAside(config.showRightAside);
+    }
+  }, [config.showRightAside, setShowRightAside]);
 }
