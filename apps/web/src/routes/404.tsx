@@ -1,3 +1,4 @@
+import { useLayoutConfig } from "@/components/layout/layout-provider";
 import { DASHBOARD_ROUTE } from "@/constants";
 import { createFileRoute } from "@tanstack/react-router";
 import { Button } from "@workspace/ui/components/button";
@@ -7,6 +8,10 @@ export const Route = createFileRoute("/404")({
 });
 
 export function NotFoundComponent() {
+  useLayoutConfig({
+    title: "404 Not Found",
+  });
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-8">
       <h1 className="text-8xl md:text-9xl font-bold">404</h1>
