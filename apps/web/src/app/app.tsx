@@ -9,12 +9,12 @@ import { ThemeProvider } from "../features/theme/theme-provider";
 import { GlobalErrorBoundary } from "../components/error-boundary";
 import { AppLoader } from "./app-loader";
 
+// infrastructure component
 export function App() {
   return (
     <GlobalErrorBoundary>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-          // SidebarProvider
           <React.Suspense fallback={<AppLoader />}>
             <RouterProvider router={router} />
             <Toaster />
