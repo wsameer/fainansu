@@ -1,7 +1,8 @@
 import { useLayoutConfig } from "@/components/layout/layout-provider";
+import { SETTINGS_ROUTE } from "@/constants";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/settings")({
+export const Route = createFileRoute(SETTINGS_ROUTE)({
   component: RouteComponent,
 });
 

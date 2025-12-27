@@ -4,9 +4,7 @@ import type { QueryClient } from "@tanstack/react-query";
 import {
   SidebarInset,
   SidebarProvider,
-  SidebarTrigger,
 } from "@workspace/ui/components/sidebar";
-import { Separator } from "@workspace/ui/components/separator";
 
 import { AppBottomBar } from "@/components/navigation/app-bottom-bar";
 import { SidebarLeft } from "@/components/layout/sidebar-left";
@@ -14,8 +12,6 @@ import { SidebarLeft } from "@/components/layout/sidebar-left";
 import { RouteErrorBoundary } from "../components/error-boundary";
 import { NotFoundComponent } from "./404";
 import { SidebarRight } from "@/components/layout/sidebar-right";
-import { Button } from "@workspace/ui/components/button";
-import { BellIcon, SettingsIcon } from "lucide-react";
 import { Header } from "@/components/layout/header";
 import { LayoutProvider } from "@/components/layout/layout-provider";
 

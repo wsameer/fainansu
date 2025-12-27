@@ -47,14 +47,17 @@ export function SidebarRight({
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup className="flex items-center">
-          <Calendar
-            mode="single"
-            selected={date}
-            onSelect={setDate}
-            className="rounded-md border shadow-sm"
-            captionLayout="dropdown"
-            showWeekNumber
-          />
+          <SidebarGroupContent>
+            <Calendar
+              mode="single"
+              selected={date}
+              onSelect={setDate}
+              className="rounded-md border"
+              captionLayout="dropdown"
+              showWeekNumber
+            />
+          </SidebarGroupContent>
+
           {/*<Card className="w-full max-w-sm">
               <h3 className="text-sm font-semibold mb-4">Top Categories</h3>
               <div className="space-y-3">

@@ -1,19 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import {
-  ActivityIcon,
-  CreditCardIcon,
-  Divide,
-  DollarSignIcon,
-  TrendingUpIcon,
-} from "lucide-react";
-
 import { DASHBOARD_ROUTE } from "@/constants";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@workspace/ui/components/card";
 import { useLayoutConfig } from "@/components/layout/layout-provider";
 
 export const Route = createFileRoute(DASHBOARD_ROUTE)({
@@ -27,12 +13,12 @@ function RouteComponent() {
 
   return (
     <div className="flex flex-1 flex-col gap-4 p-4">
-      {Array.from({ length: 8 }).map((_, index) => (
-        <div
-          key={index}
-          className="bg-muted/50 aspect-video h-12 w-full rounded-lg"
-        />
-      ))}
+      <div className="grid auto-rows-min gap-4 md:grid-cols-3">
+        <div className="bg-muted/50 aspect-video rounded-xl" />
+        <div className="bg-muted/50 aspect-video rounded-xl" />
+        <div className="bg-muted/50 aspect-video rounded-xl" />
+      </div>
+      <div className="bg-muted/50 min-h-screen flex-1 rounded-xl md:min-h-min" />
     </div>
 
     // <div className="p-4 md:p-6 lg:p-8 space-y-6">
