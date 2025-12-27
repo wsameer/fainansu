@@ -13,6 +13,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from "@workspace/ui/components/sidebar";
 import { NavUser } from "../navigation/nav-user";
 import { PRIMARY_NAV_OPTIONS } from "../navigation/constants";
@@ -20,10 +21,17 @@ import { PRIMARY_NAV_OPTIONS } from "../navigation/constants";
 export const SidebarLeft = ({
   ...props
 }: React.ComponentProps<typeof Sidebar>) => {
+  const { setOpenMobile, isMobile } = useSidebar();
   const router = useRouterState();
   const navRef = useRef(null);
 
   const currentPath = router.location.pathname;
+
+  const handleNavClick = () => {
+    if (isMobile) {
+      setOpenMobile(false);
+    }
+  };
 
   return (
     <Sidebar
@@ -49,7 +57,7 @@ export const SidebarLeft = ({
                   </div>
                   <div className="grid flex-1 text-left text-sm leading-tight">
                     <span className="truncate font-medium">Fainansu</span>
-                    <span className="truncate text-xs">Enterprise</span>
+                    <span className="truncate text-xs">Free forever!</span>
                   </div>
                 </a>
               </SidebarMenuButton>
@@ -71,7 +79,7 @@ export const SidebarLeft = ({
                       isActive={currentPath === item.path}
                       className="px-2.5 md:px-2"
                     >
-                      <Link to={item.path}>
+                      <Link to={item.path} onClick={handleNavClick}>
                         <item.icon />
                         <span>{item.title}</span>
                       </Link>
