@@ -63,6 +63,7 @@ export function ThemeProvider({
   );
 }
 
+// eslint-disable-next-line -- exception
 export const useTheme = () => {
   const context = useContext(ThemeProviderContext);
 

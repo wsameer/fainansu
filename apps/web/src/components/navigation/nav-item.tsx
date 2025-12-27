@@ -13,7 +13,7 @@ export const NavItem = ({ icon, isActive, label, onClick }: Props) => {
   return (
     <Button
       className={cn(
-        "relative flex h-[42px] w-[42px] items-center justify-center rounded-full text-background dark:text-background opacity-50 hover:opacity-100",
+        "relative flex h-10.5 w-10.5 items-center justify-center rounded-full text-background dark:text-background opacity-50 hover:opacity-100",
         {
           "opacity-100 text-foreground": isActive,
         }

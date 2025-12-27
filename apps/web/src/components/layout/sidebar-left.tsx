@@ -1,3 +1,7 @@
+import { useRef } from "react";
+import { Link, useRouterState } from "@tanstack/react-router";
+import { Wallet2Icon } from "lucide-react";
+
 import {
   Sidebar,
   SidebarContent,
@@ -10,12 +14,8 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@workspace/ui/components/sidebar";
-
-import { useRef } from "react";
-import { Wallet2Icon } from "lucide-react";
 import { NavUser } from "../navigation/nav-user";
 import { PRIMARY_NAV_OPTIONS } from "../navigation/constants";
-import { Link, useRouterState } from "@tanstack/react-router";
 
 export const SidebarLeft = ({
   ...props
@@ -101,10 +101,6 @@ export const SidebarLeft = ({
             <div className="text-foreground text-base font-medium">
               Fainansu
             </div>
-            {/*<Label className="flex items-center gap-2 text-sm">
-              <span>Unreads</span>
-              <Switch className="shadow-none" />
-            </Label>*/}
           </div>
           <SidebarInput placeholder="Type to search..." />
         </SidebarHeader>
