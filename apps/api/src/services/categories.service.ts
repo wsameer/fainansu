@@ -1,11 +1,7 @@
 import { db } from "../lib/db.js";
 import { categories, eq, and, desc, isNull } from "@workspace/db";
 import { AppError } from "../lib/errors.js";
-import type {
-  CategoryQuery,
-  InsertCategory,
-  UpdateCategory,
-} from "@workspace/types";
+import type { CategoryQuery, InsertCategory, UpdateCategory } from "@workspace/types";
 
 /**
  * Categories Service
@@ -49,11 +45,7 @@ export class CategoriesService {
    * Get a single category by ID
    */
   async getById(id: string) {
-    const [category] = await db
-      .select()
-      .from(categories)
-      .where(eq(categories.id, id))
-      .limit(1);
+    const [category] = await db.select().from(categories).where(eq(categories.id, id)).limit(1);
 
     if (!category) {
       throw new AppError(404, "Category not found", "CATEGORY_NOT_FOUND");
@@ -93,11 +85,7 @@ export class CategoriesService {
     if (data.parentId) {
       // Prevent circular reference (category can't be its own parent)
       if (data.parentId === id) {
-        throw new AppError(
-          400,
-          "Category cannot be its own parent",
-          "INVALID_PARENT"
-        );
+        throw new AppError(400, "Category cannot be its own parent", "INVALID_PARENT");
       }
       await this.getById(data.parentId);
     }

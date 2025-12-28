@@ -1,12 +1,7 @@
 import { Hono } from "hono";
 import { accountsService } from "../services/accounts.service.js";
 import { validate } from "../middleware/validator.js";
-import {
-  AccountQuerySchema,
-  InsertAccountSchema,
-  UpdateAccountSchema,
-  type ApiResponse,
-} from "@workspace/types";
+import { AccountQuerySchema, InsertAccountSchema, UpdateAccountSchema, type ApiResponse } from "@workspace/types";
 import z from "zod";
 
 /**
@@ -97,21 +92,16 @@ app.post("/", validate("json", InsertAccountSchema), async (c) => {
  * PUT /api/accounts/:id
  * Update an existing account
  */
-app.put(
-  "/:id",
-  validate("param", uuidParamSchema),
-  validate("json", UpdateAccountSchema),
-  async (c) => {
-    const { id } = c.req.valid("param");
-    const data = c.req.valid("json");
-    const updatedAccount = await accountsService.update(id, data);
+app.put("/:id", validate("param", uuidParamSchema), validate("json", UpdateAccountSchema), async (c) => {
+  const { id } = c.req.valid("param");
+  const data = c.req.valid("json");
+  const updatedAccount = await accountsService.update(id, data);
 
-    return c.json<ApiResponse<typeof updatedAccount>>({
-      success: true,
-      data: updatedAccount,
-    });
-  }
-);
+  return c.json<ApiResponse<typeof updatedAccount>>({
+    success: true,
+    data: updatedAccount,
+  });
+});
 
 /**
  * DELETE /api/accounts/:id

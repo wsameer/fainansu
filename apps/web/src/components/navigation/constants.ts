@@ -1,11 +1,4 @@
-import {
-  FileTextIcon,
-  HouseIcon,
-  LandmarkIcon,
-  ScaleIcon,
-  SettingsIcon,
-  WalletCardsIcon,
-} from "lucide-react";
+import { FileTextIcon, HouseIcon, LandmarkIcon, ScaleIcon, SettingsIcon, WalletCardsIcon } from "lucide-react";
 import {
   ACCOUNTS_ROUTE,
   BUDGET_ROUTE,

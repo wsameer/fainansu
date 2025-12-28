@@ -18,9 +18,7 @@ import {
 import { NavUser } from "../navigation/nav-user";
 import { PRIMARY_NAV_OPTIONS } from "../navigation/constants";
 
-export const SidebarLeft = ({
-  ...props
-}: React.ComponentProps<typeof Sidebar>) => {
+export const SidebarLeft = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
   const { setOpenMobile, isMobile } = useSidebar();
   const router = useRouterState();
   const navRef = useRef(null);
@@ -34,19 +32,11 @@ export const SidebarLeft = ({
   };
 
   return (
-    <Sidebar
-      collapsible="icon"
-      ref={navRef}
-      className="overflow-hidden *:data-[sidebar=sidebar]:flex-row"
-      {...props}
-    >
+    <Sidebar collapsible="icon" ref={navRef} className="overflow-hidden *:data-[sidebar=sidebar]:flex-row" {...props}>
       {/* This is the first sidebar */}
       {/* We disable collapsible and adjust width to icon. */}
       {/* This will make the sidebar appear as icons. */}
-      <Sidebar
-        collapsible="none"
-        className="w-[calc(var(--sidebar-width-icon)+1px)]! border-r"
-      >
+      <Sidebar collapsible="none" className="w-[calc(var(--sidebar-width-icon)+1px)]! border-r">
         <SidebarHeader>
           <SidebarMenu>
             <SidebarMenuItem>
@@ -106,9 +96,7 @@ export const SidebarLeft = ({
       <Sidebar collapsible="none" className="hidden flex-1 md:flex">
         <SidebarHeader className="gap-3.5 border-b p-4">
           <div className="flex w-full items-center justify-between">
-            <div className="text-foreground text-base font-medium">
-              Fainansu
-            </div>
+            <div className="text-foreground text-base font-medium">Fainansu</div>
           </div>
           <SidebarInput placeholder="Type to search..." />
         </SidebarHeader>

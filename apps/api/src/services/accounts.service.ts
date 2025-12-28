@@ -1,10 +1,6 @@
 import { db } from "../lib/db.js";
 import { accounts, eq, and, desc } from "@workspace/db";
-import type {
-  InsertAccount,
-  UpdateAccount,
-  AccountQuery,
-} from "@workspace/types";
+import type { InsertAccount, UpdateAccount, AccountQuery } from "@workspace/types";
 import { AppError } from "../lib/errors.js";
 
 /**
@@ -40,11 +36,7 @@ export class AccountsService {
    * Get a single account by ID
    */
   async getById(id: string) {
-    const [account] = await db
-      .select()
-      .from(accounts)
-      .where(eq(accounts.id, id))
-      .limit(1);
+    const [account] = await db.select().from(accounts).where(eq(accounts.id, id)).limit(1);
 
     if (!account) {
       throw new AppError(404, "Account not found", "ACCOUNT_NOT_FOUND");
@@ -140,10 +132,7 @@ export class AccountsService {
    * Calculate total balance across all active accounts
    */
   async getTotalBalance() {
-    const activeAccounts = await db
-      .select()
-      .from(accounts)
-      .where(eq(accounts.isActive, true));
+    const activeAccounts = await db.select().from(accounts).where(eq(accounts.isActive, true));
 
     const total = activeAccounts.reduce((sum, account) => {
       return sum + parseFloat(account.balance);

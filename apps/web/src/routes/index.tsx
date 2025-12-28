@@ -1,22 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { DASHBOARD_ROUTE } from "@/constants";
 import { useLayoutConfig } from "@/components/layout/layout-provider";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@workspace/ui/components/card";
-import {
-  Item,
-  ItemActions,
-  ItemContent,
-  ItemDescription,
-  ItemTitle,
-} from "@workspace/ui/components/item";
-import { Button } from "@workspace/ui/components/button";
+import { Card, CardDescription, CardHeader, CardTitle } from "@workspace/ui/components/card";
 
 export const Route = createFileRoute(DASHBOARD_ROUTE)({
   component: RouteComponent,
@@ -34,9 +19,7 @@ function RouteComponent() {
           <Card className="@container/card">
             <CardHeader>
               <CardDescription>Total Revenue</CardDescription>
-              <CardTitle className="text-l tabular-nums font-light @[250px]/card:text-l">
-                $1,250.00
-              </CardTitle>
+              <CardTitle className="text-l tabular-nums font-light @[250px]/card:text-l">$1,250.00</CardTitle>
             </CardHeader>
           </Card>
         </div>
@@ -44,9 +27,7 @@ function RouteComponent() {
           <Card className="@container/card">
             <CardHeader>
               <CardDescription>Total Revenue</CardDescription>
-              <CardTitle className="text-l tabular-nums font-light @[250px]/card:text-l">
-                $1,250.00
-              </CardTitle>
+              <CardTitle className="text-l tabular-nums font-light @[250px]/card:text-l">$1,250.00</CardTitle>
             </CardHeader>
           </Card>
         </div>
@@ -54,9 +35,7 @@ function RouteComponent() {
           <Card className="@container/card">
             <CardHeader>
               <CardDescription>Total Revenue</CardDescription>
-              <CardTitle className="text-l tabular-nums font-light @[250px]/card:text-l">
-                $1,250.00
-              </CardTitle>
+              <CardTitle className="text-l tabular-nums font-light @[250px]/card:text-l">$1,250.00</CardTitle>
             </CardHeader>
           </Card>
         </div>

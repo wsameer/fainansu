@@ -1,9 +1,5 @@
 import React, { useRef } from "react";
-import {
-  linkOptions,
-  useNavigate,
-  useRouterState,
-} from "@tanstack/react-router";
+import { linkOptions, useNavigate, useRouterState } from "@tanstack/react-router";
 import { Settings2 } from "lucide-react";
 
 import { NavItem } from "./nav-item";

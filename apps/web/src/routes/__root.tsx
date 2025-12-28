@@ -1,10 +1,7 @@
 import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import type { QueryClient } from "@tanstack/react-query";
-import {
-  SidebarInset,
-  SidebarProvider,
-} from "@workspace/ui/components/sidebar";
+import { SidebarInset, SidebarProvider } from "@workspace/ui/components/sidebar";
 
 import { AppBottomBar } from "@/components/navigation/app-bottom-bar";
 import { SidebarLeft } from "@/components/layout/sidebar-left";
@@ -47,12 +44,7 @@ function RootComponent() {
           <AppBottomBar />
           <SidebarRight />
         </SidebarProvider>
-        {import.meta.env.DEV && (
-          <TanStackRouterDevtools
-            initialIsOpen={false}
-            position="bottom-right"
-          />
-        )}
+        {import.meta.env.DEV && <TanStackRouterDevtools initialIsOpen={false} position="bottom-right" />}
       </LayoutProvider>
     </>
   );

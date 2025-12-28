@@ -8,9 +8,7 @@ export const router = createRouter({
   context: {
     queryClient,
   },
-  defaultPendingComponent: () => (
-    <div>Loading form global pending component...</div>
-  ),
+  defaultPendingComponent: () => <div>Loading form global pending component...</div>,
   defaultPreload: "intent",
   scrollRestoration: true,
   defaultStructuralSharing: true,

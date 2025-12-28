@@ -23,11 +23,7 @@ function ErrorFallback({ error, resetErrorBoundary }: ErrorFallbackProps) {
           <Button onClick={resetErrorBoundary} className="w-full">
             Try again
           </Button>
-          <Button
-            variant="outline"
-            onClick={() => (window.location.href = "/")}
-            className="w-full"
-          >
+          <Button variant="outline" onClick={() => (window.location.href = "/")} className="w-full">
             Go to homepage
           </Button>
         </div>
@@ -66,12 +62,7 @@ export class GlobalErrorBoundary extends Component<Props, State> {
 
   render(): ReactNode {
     if (this.state.hasError && this.state.error) {
-      return (
-        <ErrorFallback
-          error={this.state.error}
-          resetErrorBoundary={this.resetErrorBoundary}
-        />
-      );
+      return <ErrorFallback error={this.state.error} resetErrorBoundary={this.resetErrorBoundary} />;
     }
 
     return this.props.children;

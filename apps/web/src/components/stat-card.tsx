@@ -6,15 +6,8 @@ interface StatCardProps {
   icon?: React.ReactNode;
 }
 
-export const StatCard = ({
-  title,
-  value,
-  change,
-  changeType,
-  icon,
-}: StatCardProps) => {
-  const changeColor =
-    changeType === "increase" ? "text-green-600" : "text-red-600";
+export const StatCard = ({ title, value, change, changeType, icon }: StatCardProps) => {
+  const changeColor = changeType === "increase" ? "text-green-600" : "text-red-600";
   const changeSymbol = changeType === "increase" ? "↑" : "↓";
 
   return (

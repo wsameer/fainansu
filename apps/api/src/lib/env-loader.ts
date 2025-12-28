@@ -21,9 +21,7 @@ export function loadEnvFiles() {
   // Load from app directory first, then root (app takes precendence)
   const allEnvFiles = [
     ...rootEnvFiles.map((file) => ({ file, location: "root" })),
-    ...envFiles
-      .map((file) => resolve(cwd, file))
-      .map((file) => ({ file, location: "app" })),
+    ...envFiles.map((file) => resolve(cwd, file)).map((file) => ({ file, location: "app" })),
   ];
 
   const loadedFiles: string[] = [];

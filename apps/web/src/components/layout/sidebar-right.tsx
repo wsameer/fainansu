@@ -1,10 +1,5 @@
 import * as React from "react";
-import {
-  DollarSignIcon,
-  Plus,
-  TrendingDownIcon,
-  TrendingUpIcon,
-} from "lucide-react";
+import { Plus } from "lucide-react";
 
 import { Calendar } from "@workspace/ui/components/calendar";
 import {
@@ -20,17 +15,11 @@ import {
 } from "@workspace/ui/components/sidebar";
 import { Card } from "@workspace/ui/components/card";
 
-export function SidebarRight({
-  ...props
-}: React.ComponentProps<typeof Sidebar>) {
+export function SidebarRight({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const [date, setDate] = React.useState<Date | undefined>(new Date());
 
   return (
-    <Sidebar
-      collapsible="none"
-      className="sticky top-0 hidden h-svh border-l lg:flex w-64"
-      {...props}
-    >
+    <Sidebar collapsible="none" className="sticky top-0 hidden h-svh border-l lg:flex w-64" {...props}>
       <SidebarHeader className="gap-3.5 p-3">
         <Card className="p-4">
           <div className="space-y-2">

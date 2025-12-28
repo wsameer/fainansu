@@ -1,12 +1,4 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-  type PropsWithChildren,
-  type ReactNode,
-} from "react";
+import { createContext, useContext, useEffect, useRef, useState, type PropsWithChildren, type ReactNode } from "react";
 
 type LayoutContextType = {
   headerTitle: string;
@@ -51,11 +43,7 @@ export function useLayout() {
 
 // Hook to set layout config from pages
 // eslint-disable-next-line -- exception
-export function useLayoutConfig(config: {
-  title?: string;
-  actions?: ReactNode;
-  showRightAside?: boolean;
-}) {
+export function useLayoutConfig(config: { title?: string; actions?: ReactNode; showRightAside?: boolean }) {
   const { setHeaderTitle, setHeaderActions, setShowRightAside } = useLayout();
   const isInitialMount = useRef(true);
 
