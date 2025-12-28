@@ -6,7 +6,7 @@
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*", "tsconfig.json", "package.json"],
       "outputs": ["dist/**", "build/**"],
-      "env": ["NODE_ENV", "DATABASE_URL", "DIRECT_URL"]
+      "env": ["NODE_ENV", "DATABASE_URL", "DIRECT_URL", "npm_package_version"]
     },
     "lint": {
       "dependsOn": ["^build"],
@@ -41,12 +41,7 @@
     },
     "check-types": {
       "dependsOn": ["^build"],
-      "inputs": [
-        "src/**/*.ts",
-        "src/**/*.tsx",
-        "tsconfig.json",
-        "package.json"
-      ],
+      "inputs": ["src/**/*.ts", "src/**/*.tsx", "tsconfig.json", "package.json"],
       "outputs": []
     },
     "dev": {

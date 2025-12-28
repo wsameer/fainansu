@@ -1,22 +1,19 @@
 import * as React from "react";
-import { Plus } from "lucide-react";
 
-import { Calendar } from "@workspace/ui/components/calendar";
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
 } from "@workspace/ui/components/sidebar";
 import { Card } from "@workspace/ui/components/card";
+import { useLayout } from "./layout-provider";
 
 export function SidebarRight({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const [date, setDate] = React.useState<Date | undefined>(new Date());
+  const { rightSidebarContent, showRightSidebar } = useLayout();
+
+  if (!showRightSidebar) return null;
 
   return (
     <Sidebar collapsible="none" className="sticky top-0 hidden h-svh border-l lg:flex w-64" {...props}>
@@ -36,28 +33,13 @@ export function SidebarRight({ ...props }: React.ComponentProps<typeof Sidebar>)
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup className="flex items-center">
-          <SidebarGroupContent>
-            <Calendar
-              mode="single"
-              selected={date}
-              onSelect={setDate}
-              className="rounded-md border"
-              captionLayout="dropdown"
-              showWeekNumber
-            />
-          </SidebarGroupContent>
+          <SidebarGroupContent>{rightSidebarContent || <DefaultRightSidebarContent />}</SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton>
-              <Plus />
-              <span>New Calendar</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarFooter>
     </Sidebar>
   );
+}
+
+function DefaultRightSidebarContent() {
+  return <div>hello right sidebar</div>;
 }

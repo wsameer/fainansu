@@ -25,27 +25,25 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 // This is the layout component
 function RootComponent() {
   return (
-    <>
-      <LayoutProvider>
-        <SidebarProvider
-          style={
-            {
-              "--sidebar-width": "350px",
-            } as React.CSSProperties
-          }
-        >
-          <SidebarLeft />
-          <SidebarInset>
-            <Header />
-            <div className="flex flex-1 flex-col gap-4 p-4">
-              <Outlet />
-            </div>
-          </SidebarInset>
-          <AppBottomBar />
-          <SidebarRight />
-        </SidebarProvider>
-        {import.meta.env.DEV && <TanStackRouterDevtools initialIsOpen={false} position="bottom-right" />}
-      </LayoutProvider>
-    </>
+    <LayoutProvider>
+      <SidebarProvider
+        style={
+          {
+            "--sidebar-width": "350px",
+          } as React.CSSProperties
+        }
+      >
+        <SidebarLeft />
+        <SidebarInset>
+          <Header />
+          <div className="flex flex-1 flex-col gap-4 p-4">
+            <Outlet />
+          </div>
+        </SidebarInset>
+        <AppBottomBar />
+        <SidebarRight />
+      </SidebarProvider>
+      {import.meta.env.DEV && <TanStackRouterDevtools initialIsOpen={false} position="bottom-right" />}
+    </LayoutProvider>
   );
 }

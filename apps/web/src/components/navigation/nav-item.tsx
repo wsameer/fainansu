@@ -27,11 +27,7 @@ export const NavItem = ({ icon, isActive, label, onClick }: Props) => {
           isActive ? "opacity-100" : "opacity-0"
         }`}
       />
-      <span className="relative">
-        {React.cloneElement(icon, {
-          className: isActive ? "text-foreground" : "",
-        })}
-      </span>
+      <span className={`relative ${isActive ? "text-foreground" : ""}`}>{icon}</span>
       <span className="sr-only">{label}</span>
     </Button>
   );

@@ -1,10 +1,9 @@
-import { APPEARANCE_SETTINGS_ROUTE } from "@/constants";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute(APPEARANCE_SETTINGS_ROUTE)({
+export const Route = createFileRoute('/settings/appearance')({
   component: RouteComponent,
-});
+})
 
 function RouteComponent() {
-  return <div>Hello "/settings/appearance"!</div>;
+  return <div>Hello "/settings/appearance"!</div>
 }
