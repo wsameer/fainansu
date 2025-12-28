@@ -3,7 +3,7 @@ import {
   HouseIcon,
   LandmarkIcon,
   ScaleIcon,
-  Settings2Icon,
+  SettingsIcon,
   WalletCardsIcon,
 } from "lucide-react";
 import {
@@ -30,5 +30,5 @@ export const PRIMARY_NAV_OPTIONS = [
     path: EXPENSE_CATEGORY_SETTINGS_ROUTE,
   },
   { icon: ScaleIcon, title: "Budget", path: BUDGET_ROUTE },
-  { icon: Settings2Icon, title: "Settings", path: SETTINGS_ROUTE },
+  { icon: SettingsIcon, title: "Settings", path: SETTINGS_ROUTE },
 ].filter(Boolean) as SideNavigationItem[];
