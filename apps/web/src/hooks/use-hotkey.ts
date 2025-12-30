@@ -33,11 +33,7 @@ export function useHotkey({ key, modifiers = [], callback, enabled = true }: Hot
 
       // Don't trigger if user is typing in an input
       const target = event.target as HTMLElement;
-      if (
-        target.tagName === "INPUT" ||
-        target.tagName === "TEXTAREA" ||
-        target.isContentEditable
-      ) {
+      if (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable) {
         return;
       }
 

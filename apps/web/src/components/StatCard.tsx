@@ -23,7 +23,7 @@ export const StatCard = ({ title, value, change, changeType, icon }: StatCardPro
           )}
         </div>
         {icon && (
-          <div className="ml-4 flex-shrink-0">
+          <div className="ml-4 shrink-0">
             <div className="w-8 h-8 text-gray-400">{icon}</div>
           </div>
         )}

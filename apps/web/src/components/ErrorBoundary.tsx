@@ -41,6 +41,7 @@ interface State {
   error: Error | null;
 }
 
+// React 19 way of doing things
 export class GlobalErrorBoundary extends Component<Props, State> {
   constructor(props: Props) {
     super(props);

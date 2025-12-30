@@ -8,6 +8,7 @@ import { AppBottomBar } from "@/features/navigation";
 import { RouteErrorBoundary } from "@/components/ErrorBoundary";
 import { useHotkey } from "@/hooks/use-hotkey";
 import { NotFoundComponent } from "./404";
+import { PROFILE_SETTINGS_ROUTE } from "@/constants";
 
 interface RouterContext {
   queryClient: QueryClient;
@@ -33,7 +34,7 @@ function RootComponent() {
       if (!currentPath.startsWith("/settings")) {
         sessionStorage.setItem("settings-return-path", currentPath);
       }
-      navigate({ to: "/settings/profile" });
+      navigate({ to: PROFILE_SETTINGS_ROUTE });
     },
   });
 

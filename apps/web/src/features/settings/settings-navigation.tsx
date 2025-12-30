@@ -3,7 +3,6 @@ import {
   Item,
   ItemActions,
   ItemContent,
-  ItemDescription,
   ItemMedia,
   ItemTitle,
 } from "@workspace/ui/components/item";
@@ -19,21 +18,18 @@ export const SettingsNavigation = memo(function SettingsNavigation() {
       href: "/settings/profile",
       label: "Profile",
       icon: UserIcon,
-      description: "Personal information",
     },
     {
       id: 2,
       href: "/settings/appearance",
       label: "Appearance",
       icon: PaletteIcon,
-      description: "Dark and light mode, font size",
     },
     {
       id: 3,
       href: "/settings/backup",
       label: "Backup",
       icon: DatabaseIcon,
-      description: "Import, Export, A complete reset",
     },
   ];
 
@@ -41,19 +37,16 @@ export const SettingsNavigation = memo(function SettingsNavigation() {
     <nav>
       {navItems.map((item) => (
         <Item
-          variant={pathname === item.href ? "outline" : "default"}
+          variant={pathname === item.href ? "muted" : "default"}
           size="sm"
           key={item.id}
-          render={<Link to={item.href} className="mb-2" />}
+          render={<Link to={item.href} className="mb-0.5" />}
         >
           <ItemMedia>
             <item.icon className="size-4" />
           </ItemMedia>
           <ItemContent>
             <ItemTitle>{item.label}</ItemTitle>
-            {item.description && (
-              <ItemDescription className="w-46 truncate">{item.description}</ItemDescription>
-            )}
           </ItemContent>
           <ItemActions>
             <ChevronRightIcon className="size-4" />

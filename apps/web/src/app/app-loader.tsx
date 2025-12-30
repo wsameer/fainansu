@@ -1,5 +1,6 @@
 import { Skeleton } from "@workspace/ui/components/skeleton";
 
+// TODO - make it more customized to look like the actual app
 export function AppLoader() {
   return (
     <div className="flex flex-col space-y-3">

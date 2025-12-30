@@ -24,6 +24,4 @@ export const DATA_SETTINGS_ROUTE = (SETTINGS_ROUTE + "/data") as keyof FileRoute
 
 export const ACCOUNT_SETTINGS_ROUTE = (SETTINGS_ROUTE + "/accounts") as keyof FileRoutesByPath;
 
-export const USER_PROFILE_ROUTE = (SETTINGS_ROUTE + "/users/me") as keyof FileRoutesByPath;
-
 export const BUDGET_ROUTE = "/budget" as keyof FileRoutesByPath;

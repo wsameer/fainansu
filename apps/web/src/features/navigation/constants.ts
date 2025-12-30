@@ -2,6 +2,8 @@ import {
   FileTextIcon,
   HouseIcon,
   LandmarkIcon,
+  LifeBuoyIcon,
+  MessageCircleQuestionIcon,
   ScaleIcon,
   SettingsIcon,
   WalletCardsIcon,
@@ -31,4 +33,9 @@ export const PRIMARY_NAV_OPTIONS: SideNavigationItem[] = [
   },
   { icon: ScaleIcon, title: "Budget", path: BUDGET_ROUTE },
   { icon: SettingsIcon, title: "Settings", path: SETTINGS_ROUTE },
+];
+
+export const SECONDARY_NAV_OPTIONS: SideNavigationItem[] = [
+  { icon: MessageCircleQuestionIcon, title: "Feedback", path: "#" },
+  { icon: LifeBuoyIcon, title: "Support", path: "#" },
 ];

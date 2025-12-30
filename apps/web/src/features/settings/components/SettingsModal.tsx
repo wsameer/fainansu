@@ -2,16 +2,12 @@ import { useEffect } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { XIcon } from "lucide-react";
 
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@workspace/ui/components/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@workspace/ui/components/dialog";
 import {
   Drawer,
   DrawerClose,
   DrawerContent,
+  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
 } from "@workspace/ui/components/drawer";
@@ -55,21 +51,20 @@ export function SettingsModal({ children }: SettingsModalProps) {
     navigate({ to: returnPath });
   };
 
-  // Mobile: Full-screen drawer from right
+  // Mobile: Full-screen drawer from bottom
   if (isMobile) {
     return (
-      <Drawer open direction="right" onOpenChange={(open) => !open && handleClose()}>
-        <DrawerContent className="w-full! max-w-full! h-full rounded-none p-0">
-          <DrawerHeader className="border-b px-4 py-3 flex-row items-center justify-between">
+      <Drawer open direction="bottom" onOpenChange={(open) => !open && handleClose()}>
+        <DrawerContent className="h-full data-[vaul-drawer-direction=bottom]:max-h-[80vh] data-[vaul-drawer-direction=top]:max-h-[80vh]">
+          <DrawerHeader className="border-b ">
             <DrawerTitle>Settings</DrawerTitle>
-            <DrawerClose asChild>
-              <Button variant="ghost" size="icon-sm">
-                <XIcon className="size-4" />
-                <span className="sr-only">Close</span>
-              </Button>
-            </DrawerClose>
           </DrawerHeader>
-          <div className="flex-1 overflow-y-auto p-4">{children}</div>
+          <div className="no-scrollbar overflow-y-auto px-4">{children}</div>
+          <DrawerFooter>
+            <DrawerClose asChild>
+              <Button variant="secondary">Close</Button>
+            </DrawerClose>
+          </DrawerFooter>
         </DrawerContent>
       </Drawer>
     );
@@ -79,7 +74,7 @@ export function SettingsModal({ children }: SettingsModalProps) {
   return (
     <Dialog open onOpenChange={(open) => !open && handleClose()}>
       <DialogContent
-        className="max-w-3xl! w-full h-[80vh] p-0 gap-0 flex flex-col"
+        className="max-w-4xl! w-full h-[80vh] p-0 gap-0 flex flex-col"
         showCloseButton={false}
       >
         <DialogHeader className="border-b px-6 py-4 flex-row items-center justify-between shrink-0">
@@ -91,11 +86,11 @@ export function SettingsModal({ children }: SettingsModalProps) {
         </DialogHeader>
         <div className="flex flex-1 overflow-hidden">
           {/* Sidebar Navigation */}
-          <div className="w-56 border-r p-4 overflow-y-auto shrink-0">
+          <div className="w-1/5 p-2 overflow-y-auto shrink-0">
             <SettingsNavigation />
           </div>
           {/* Content Area */}
-          <div className="flex-1 overflow-y-auto p-6">{children}</div>
+          <div className="flex-1 overflow-y-auto p-4">{children}</div>
         </div>
       </DialogContent>
     </Dialog>

@@ -17,7 +17,7 @@ export const Route = createFileRoute("/settings/backup")({
 
 function RouteComponent() {
   return (
-    <div className="space-y-4 w-2/3">
+    <div className="space-y-4">
       <SettingsTitle title="Backup Data" description="Placeholder description" />
 
       <Item className="p-0">
