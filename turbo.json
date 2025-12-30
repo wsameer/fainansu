@@ -1,0 +1,96 @@
+{
+  "$schema": "https://turborepo.com/schema.json",
+  "ui": "tui",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*", "tsconfig.json", "package.json"],
+      "outputs": ["dist/**", "build/**"],
+      "env": ["NODE_ENV", "DATABASE_URL", "DIRECT_URL", "npm_package_version"]
+    },
+    "lint": {
+      "dependsOn": ["^build"],
+      "inputs": [
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "src/**/*.js",
+        "src/**/*.jsx",
+        "*.config.js",
+        "*.config.ts",
+        "*.eslintrc*",
+        "eslint.config.*",
+        "package.json"
+      ],
+      "outputs": []
+    },
+    "lint:fix": {
+      "dependsOn": ["^build"],
+      "inputs": [
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "src/**/*.js",
+        "src/**/*.jsx",
+        "*.config.js",
+        "*.config.ts",
+        "*.eslintrc*",
+        "eslint.config.*",
+        "package.json"
+      ],
+      "outputs": ["src/**"],
+      "cache": false
+    },
+    "check-types": {
+      "dependsOn": ["^build"],
+      "inputs": ["src/**/*.ts", "src/**/*.tsx", "tsconfig.json", "package.json"],
+      "outputs": []
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "env": ["NODE_ENV", "PORT", "DATABASE_URL", "DIRECT_URL"]
+    },
+    "format": {
+      "inputs": [
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.js",
+        "**/*.jsx",
+        "**/*.json",
+        "**/*.md",
+        ".prettierrc*",
+        "prettier.config.*"
+      ],
+      "outputs": [],
+      "cache": false
+    },
+    "format:check": {
+      "inputs": [
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.js",
+        "**/*.jsx",
+        "**/*.json",
+        "**/*.md",
+        ".prettierrc*",
+        "prettier.config.*"
+      ],
+      "outputs": []
+    },
+    "db:generate": {
+      "cache": false,
+      "inputs": ["src/schema.ts", "drizzle.config.ts", "package.json"],
+      "outputs": ["drizzle/**", "migrations/**"]
+    },
+    "db:push": {
+      "cache": false,
+      "env": ["DATABSE_URL", "DIRECT_URL"]
+    },
+    "db:studio": {
+      "cache": false,
+      "env": ["DATABASE_URL", "DIRECT_URL"]
+    },
+    "clean": {
+      "cache": false
+    }
+  }
+}
