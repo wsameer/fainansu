@@ -10,8 +10,9 @@ import {
 } from "@workspace/ui/components/item";
 import { Button } from "@workspace/ui/components/button";
 import { TriangleAlertIcon } from "lucide-react";
+import { BACKUP_SETTINGS_ROUTE } from "@/constants";
 
-export const Route = createFileRoute("/settings/backup")({
+export const Route = createFileRoute(BACKUP_SETTINGS_ROUTE)({
   component: RouteComponent,
 });
 

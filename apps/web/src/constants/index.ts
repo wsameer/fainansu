@@ -20,7 +20,7 @@ export const PROFILE_SETTINGS_ROUTE = (SETTINGS_ROUTE + "/profile") as keyof Fil
 
 export const APPEARANCE_SETTINGS_ROUTE = (SETTINGS_ROUTE + "/appearance") as keyof FileRoutesByPath;
 
-export const DATA_SETTINGS_ROUTE = (SETTINGS_ROUTE + "/data") as keyof FileRoutesByPath;
+export const BACKUP_SETTINGS_ROUTE = (SETTINGS_ROUTE + "/backup") as keyof FileRoutesByPath;
 
 export const ACCOUNT_SETTINGS_ROUTE = (SETTINGS_ROUTE + "/accounts") as keyof FileRoutesByPath;
 

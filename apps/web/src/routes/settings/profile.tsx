@@ -1,7 +1,8 @@
+import { PROFILE_SETTINGS_ROUTE } from "@/constants";
 import { SettingsTitle } from "@/features/settings";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/settings/profile")({
+export const Route = createFileRoute(PROFILE_SETTINGS_ROUTE)({
   component: RouteComponent,
 });
 

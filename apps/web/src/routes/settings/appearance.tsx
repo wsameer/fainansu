@@ -21,8 +21,9 @@ import {
   SelectValue,
 } from "@workspace/ui/components/select";
 import { Button } from "@workspace/ui/components/button";
+import { APPEARANCE_SETTINGS_ROUTE } from "@/constants";
 
-export const Route = createFileRoute("/settings/appearance")({
+export const Route = createFileRoute(APPEARANCE_SETTINGS_ROUTE)({
   component: RouteComponent,
 });
 

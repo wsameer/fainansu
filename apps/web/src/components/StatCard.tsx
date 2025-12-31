@@ -1,33 +1,48 @@
+import { TrendingDownIcon, TrendingUpIcon } from "lucide-react";
+
+import { Badge } from "@workspace/ui/components/badge";
+import { cn } from "@workspace/ui/lib/utils";
+import {
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemDescription,
+  ItemFooter,
+  ItemHeader,
+  ItemMedia,
+  ItemTitle,
+} from "@workspace/ui/components/item";
+import { Button } from "@workspace/ui/components/button";
+import { Card, CardHeader } from "@workspace/ui/components/card";
+
 interface StatCardProps {
   title: string;
   value: string | number;
   change?: number;
   changeType?: "increase" | "decrease";
-  icon?: React.ReactNode;
 }
 
-export const StatCard = ({ title, value, change, changeType, icon }: StatCardProps) => {
-  const changeColor = changeType === "increase" ? "text-green-600" : "text-red-600";
-  const changeSymbol = changeType === "increase" ? "↑" : "↓";
+export const StatCard = ({ title, value, change, changeType }: StatCardProps) => {
+  const changeIcon = changeType === "increase" ? "+" : "-";
 
   return (
-    <div className="bg-secondary rounded-lg shadow p-6">
-      <div className="flex items-center justify-between">
-        <div className="flex-1">
-          <p className="text-sm font-medium text-gray-600">{title}</p>
-          <p className="text-2xl font-semibold text-gray-900 mt-1">{value}</p>
-          {change !== undefined && (
-            <p className={`text-sm mt-2 ${changeColor}`}>
-              {changeSymbol} {Math.abs(change)}%
-            </p>
-          )}
-        </div>
-        {icon && (
-          <div className="ml-4 shrink-0">
-            <div className="w-8 h-8 text-gray-400">{icon}</div>
-          </div>
-        )}
-      </div>
-    </div>
+    <Item variant="outline" className="h-3/5">
+      <ItemHeader className="text-muted-foreground text-xs truncate w-[90%]">{title}</ItemHeader>
+      <ItemContent>
+        <ItemTitle className="text-sm">{value}</ItemTitle>
+      </ItemContent>
+      <ItemActions>
+        <Badge
+          className={cn("h-5 font-xs @[200px]/card:h-5", {
+            "bg-green-50 text-green-700 dark:bg-green-950 dark:text-green-300":
+              changeType === "increase",
+            "bg-red-50  text-red-700 dark:bg-red-950 dark:text-red-300": changeType === "decrease",
+          })}
+        >
+          <TrendingUpIcon className="w-3 h-3 @[200px]/card:w-4 @[200px]/card:h-4" />
+          {changeIcon}${change}
+        </Badge>
+      </ItemActions>
+    </Item>
   );
 };
