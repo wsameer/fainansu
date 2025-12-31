@@ -46,13 +46,15 @@ function RouteComponent() {
         </div>
 
         {/* 60% column (10 out of 12 columns) with 3 equal cards */}
-        <div className="xl:col-span-9 grid grid-cols-3 rounded-md bg-muted/50 border-transparent gap-2.5 px-3 py-2.5 items-end-safe">
-          <StatCard title="Total Income" value="$111,250.00" change={1.74} changeType="increase" />
-          <StatCard title="Total Expense" value="$64,778.00" change={5.31} changeType="decrease" />
-          <StatCard title="Total Savings" value="$37,950.00" change={3.73} changeType="increase" />
+        <div className="xl:col-span-9 flex flex-col rounded-md bg-muted/50 border-transparent gap-2.5 px-3 py-2.5">
+          <small className="text-xs leading-none">Your year in a glimse</small>
+          <div className="grid grid-cols-3 gap-2.5">
+            <StatCard title="Income" value="$5,111,250.00" change={1.74} changeType="increase" />
+            <StatCard title="Expense" value="$64,778.00" change={5.31} changeType="decrease" />
+            <StatCard title="Savings" value="$37,950.00" change={3.73} changeType="increase" />
+          </div>
         </div>
       </div>
-      <div className="bg-muted/50 min-h-screen flex-1 rounded-xl md:min-h-min" />
     </div>
   );
 }

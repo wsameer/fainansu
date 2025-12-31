@@ -13,7 +13,14 @@ import {
   ItemTitle,
 } from "@workspace/ui/components/item";
 import { Button } from "@workspace/ui/components/button";
-import { Card, CardHeader } from "@workspace/ui/components/card";
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@workspace/ui/components/card";
 
 interface StatCardProps {
   title: string;
@@ -26,12 +33,9 @@ export const StatCard = ({ title, value, change, changeType }: StatCardProps) =>
   const changeIcon = changeType === "increase" ? "+" : "-";
 
   return (
-    <Item variant="outline" className="h-3/5">
-      <ItemHeader className="text-muted-foreground text-xs truncate w-[90%]">{title}</ItemHeader>
-      <ItemContent>
-        <ItemTitle className="text-sm">{value}</ItemTitle>
-      </ItemContent>
-      <ItemActions>
+    <Item variant="outline">
+      <ItemHeader className="flex flex-wrap">
+        <small className="text-muted-foreground text-xs truncate w-[90%]">{title}</small>
         <Badge
           className={cn("h-5 font-xs @[200px]/card:h-5", {
             "bg-green-50 text-green-700 dark:bg-green-950 dark:text-green-300":
@@ -42,7 +46,12 @@ export const StatCard = ({ title, value, change, changeType }: StatCardProps) =>
           <TrendingUpIcon className="w-3 h-3 @[200px]/card:w-4 @[200px]/card:h-4" />
           {changeIcon}${change}
         </Badge>
-      </ItemActions>
+      </ItemHeader>
+
+      <ItemContent>
+        <ItemTitle className="text-sm">{value}</ItemTitle>
+      </ItemContent>
+      <ItemActions></ItemActions>
     </Item>
   );
 };
