@@ -13,7 +13,7 @@ export function Header() {
     <div className="hidden sm:flex">
       <div className="flex flex-1 items-center gap-2">
         <SidebarTrigger className="-ml-1" />
-        <Separator orientation="vertical" className="mr-2 data-[orientation=vertical]:h-4" />
+        <Separator orientation="vertical" className="mt-1.5 mr-1 data-[orientation=vertical]:h-4" />
         <p className="text-xs font-medium">{headerTitle}</p>
       </div>
       <>

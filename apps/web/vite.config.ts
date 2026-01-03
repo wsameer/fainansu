@@ -51,7 +51,7 @@ export default defineConfig({
     },
   },
   server: {
-    port: 5173,
+    port: 5174,
     proxy: {
       // Proxy API requests to your Hono backend during development
       "/api": {
