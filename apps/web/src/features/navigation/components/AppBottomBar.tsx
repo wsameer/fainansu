@@ -2,9 +2,8 @@ import React, { useRef } from "react";
 import { linkOptions, useNavigate, useRouterState } from "@tanstack/react-router";
 import { Settings2 } from "lucide-react";
 
-import { NavItem } from "./nav-item";
-
-import { PRIMARY_NAV_OPTIONS } from "./constants";
+import { NavItem } from "./NavItem";
+import { PRIMARY_NAV_OPTIONS } from "../constants";
 
 export function AppBottomBar() {
   const router = useRouterState();
@@ -36,7 +35,6 @@ export function AppBottomBar() {
                   )
                 }
               />
-              {/*{index === 1 && <AddTransaction />}*/}
             </React.Fragment>
           );
         })}
@@ -46,7 +44,13 @@ export function AppBottomBar() {
             icon={<Settings2 />}
             isActive={location.pathname.includes(lastNavItem.path)}
             label={lastNavItem.title}
-            onClick={() => navigate(linkOptions({ to: lastNavItem.path }))}
+            onClick={() => {
+              // Store return path when navigating to settings
+              if (!currentPath.startsWith("/settings")) {
+                sessionStorage.setItem("settings-return-path", currentPath);
+              }
+              navigate(linkOptions({ to: lastNavItem.path }));
+            }}
           />
         )}
       </nav>

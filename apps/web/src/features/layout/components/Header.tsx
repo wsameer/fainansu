@@ -4,16 +4,16 @@ import { Button } from "@workspace/ui/components/button";
 import { SidebarTrigger } from "@workspace/ui/components/sidebar";
 import { Separator } from "@workspace/ui/components/separator";
 
-import { useLayout } from "./layout-provider";
+import { useLayoutStore } from "@/stores";
 
 export function Header() {
-  const { headerTitle } = useLayout();
+  const headerTitle = useLayoutStore((state) => state.headerTitle);
 
   const renderDesktopHeader = () => (
     <div className="hidden sm:flex">
       <div className="flex flex-1 items-center gap-2">
         <SidebarTrigger className="-ml-1" />
-        <Separator orientation="vertical" className="mr-2 data-[orientation=vertical]:h-4" />
+        <Separator orientation="vertical" className="mt-1.5 mr-1 data-[orientation=vertical]:h-4" />
         <p className="text-xs font-medium">{headerTitle}</p>
       </div>
       <>

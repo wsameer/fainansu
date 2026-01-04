@@ -2,7 +2,6 @@ import { createRouter, type RouteIds } from "@tanstack/react-router";
 import { queryClient } from "./query-client";
 import { routeTree } from "../routeTree.gen";
 
-// Create a new router instance
 export const router = createRouter({
   routeTree,
   context: {

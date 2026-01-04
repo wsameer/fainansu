@@ -1,4 +1,4 @@
-import { useLayoutConfig } from "@/components/layout/layout-provider";
+import { useLayoutConfig } from "@/features/layout";
 import { EXPENSE_CATEGORY_SETTINGS_ROUTE } from "@/constants";
 import { createFileRoute } from "@tanstack/react-router";
 

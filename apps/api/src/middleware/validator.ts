@@ -35,7 +35,11 @@ export function validate(target: ValidationTarget, schema: any) {
  * Combines multiple validation targets
  * Usage: validateRequest({ json: SomeSchema, query: QuerySchema })
  */
-export function validateRequest(schemas: { json?: unknown; query?: unknown; param?: unknown }): MiddlewareHandler[] {
+export function validateRequest(schemas: {
+  json?: unknown;
+  query?: unknown;
+  param?: unknown;
+}): MiddlewareHandler[] {
   const middlewares: MiddlewareHandler[] = [];
 
   if (schemas.json) {

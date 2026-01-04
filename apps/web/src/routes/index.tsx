@@ -1,7 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useLayoutConfig } from "@/features/layout";
+import { StatCard } from "@/components/StatCard";
 import { DASHBOARD_ROUTE } from "@/constants";
-import { useLayoutConfig } from "@/components/layout/layout-provider";
-import { Card, CardDescription, CardHeader, CardTitle } from "@workspace/ui/components/card";
+import {
+  Item,
+  ItemContent,
+  ItemDescription,
+  ItemFooter,
+  ItemTitle,
+} from "@workspace/ui/components/item";
+import { Button } from "@workspace/ui/components/button";
+import { Cashflow } from "@/features/cashflow";
+import { SpendingSummaryChart } from "@/features/cashflow/components/SpendingSummaryChart";
 
 export const Route = createFileRoute(DASHBOARD_ROUTE)({
   component: RouteComponent,
@@ -13,143 +23,52 @@ function RouteComponent() {
   });
 
   return (
-    <div className="flex flex-1 flex-col gap-4">
-      <div className="flex flex-row">
-        <div className="basis-1/4 md:basis-1/3 mr-4">
-          <Card className="@container/card">
-            <CardHeader>
-              <CardDescription>Total Revenue</CardDescription>
-              <CardTitle className="text-l tabular-nums font-light @[250px]/card:text-l">$1,250.00</CardTitle>
-            </CardHeader>
-          </Card>
+    <div>
+      <div className="grid grid-cols-1 gap-4 xl:grid-cols-12">
+        {/* 40% column (2 out of 12 columns) */}
+        <div className="xl:col-span-4">
+          <Item variant="muted">
+            <ItemContent className="gap-2.5">
+              <ItemTitle className="text-muted-foreground text-sm font-light">
+                Total Balance
+              </ItemTitle>
+              <ItemDescription className="items-center flex gap-0.5">
+                <span className="text-4xl text-foreground">$20,670</span> <sup>CAD</sup>
+              </ItemDescription>
+            </ItemContent>
+            <ItemFooter>
+              <div className="flex w-full justify-between">
+                <Button variant="default" size="lg">
+                  Deposit
+                </Button>
+                <Button variant="secondary" size="lg">
+                  Expense
+                </Button>
+              </div>
+            </ItemFooter>
+          </Item>
         </div>
-        <div className="basis-1/4 md:basis-1/3 mr-4">
-          <Card className="@container/card">
-            <CardHeader>
-              <CardDescription>Total Revenue</CardDescription>
-              <CardTitle className="text-l tabular-nums font-light @[250px]/card:text-l">$1,250.00</CardTitle>
-            </CardHeader>
-          </Card>
+
+        {/* 60% column (10 out of 12 columns) with 3 equal cards */}
+        <div className="xl:col-span-8 flex flex-col rounded-md bg-muted/50 border-transparent gap-2.5 px-3 py-2.5">
+          <p className="text-xs">Monthly financial rythm</p>
+          <div className="grid grid-cols-3 gap-2.5">
+            <StatCard title="Income" value="$5,111,250.00" sentiment="Trending up by 5.2%" />
+            <StatCard title="Expense" value="$64,778.00" sentiment="Trending down by 1.2%" />
+            <StatCard title="Savings" value="$37,950.00" sentiment="Trending up by 15.2%" />
+          </div>
         </div>
-        <div className="basis-1/2 md:basis-1/3">
-          <Card className="@container/card">
-            <CardHeader>
-              <CardDescription>Total Revenue</CardDescription>
-              <CardTitle className="text-l tabular-nums font-light @[250px]/card:text-l">$1,250.00</CardTitle>
-            </CardHeader>
-          </Card>
+
+        <div className="xl:col-span-8">
+          <Cashflow />
         </div>
+
+        <div className="xl:col-span-4">
+          <SpendingSummaryChart />
+        </div>
+
+        <div className="xl:col-span-8"></div>
       </div>
-      <div className="bg-muted/50 min-h-screen flex-1 rounded-xl md:min-h-min" />
     </div>
-
-    // <div className="p-4 md:p-6 lg:p-8 space-y-6">
-    //   <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-    //     <Card>
-    //       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-    //         <CardTitle className="text-sm font-medium">
-    //           Total Expenses
-    //         </CardTitle>
-    //         <DollarSignIcon className="h-4 w-4 text-muted-foreground" />
-    //       </CardHeader>
-    //       <CardContent>
-    //         <div className="text-2xl font-bold">$2,450.00</div>
-    //         <p className="text-xs text-muted-foreground">
-    //           +12% from last month
-    //         </p>
-    //       </CardContent>
-    //     </Card>
-
-    //     <Card>
-    //       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-    //         <CardTitle className="text-sm font-medium">Budget</CardTitle>
-    //         <TrendingUpIcon className="h-4 w-4 text-muted-foreground" />
-    //       </CardHeader>
-    //       <CardContent>
-    //         <div className="text-2xl font-bold">$4,000.00</div>
-    //         <p className="text-xs text-muted-foreground">38% remaining</p>
-    //       </CardContent>
-    //     </Card>
-
-    //     <Card>
-    //       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-    //         <CardTitle className="text-sm font-medium">Transactions</CardTitle>
-    //         <CreditCardIcon className="h-4 w-4 text-muted-foreground" />
-    //       </CardHeader>
-    //       <CardContent>
-    //         <div className="text-2xl font-bold">142</div>
-    //         <p className="text-xs text-muted-foreground">+19 from yesterday</p>
-    //       </CardContent>
-    //     </Card>
-
-    //     <Card>
-    //       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-    //         <CardTitle className="text-sm font-medium">Avg. Daily</CardTitle>
-    //         <ActivityIcon className="h-4 w-4 text-muted-foreground" />
-    //       </CardHeader>
-    //       <CardContent>
-    //         <div className="text-2xl font-bold">$81.67</div>
-    //         <p className="text-xs text-muted-foreground">Based on 30 days</p>
-    //       </CardContent>
-    //     </Card>
-    //   </div>
-
-    //   <Card>
-    //     <CardHeader>
-    //       <CardTitle>Recent Expenses</CardTitle>
-    //     </CardHeader>
-    //     <CardContent>
-    //       <div className="space-y-4">
-    //         {[
-    //           {
-    //             date: "Dec 24, 2025",
-    //             merchant: "Whole Foods Market",
-    //             category: "Food & Dining",
-    //             amount: "$87.50",
-    //           },
-    //           {
-    //             date: "Dec 23, 2025",
-    //             merchant: "Shell Gas Station",
-    //             category: "Transportation",
-    //             amount: "$45.00",
-    //           },
-    //           {
-    //             date: "Dec 23, 2025",
-    //             merchant: "Amazon",
-    //             category: "Shopping",
-    //             amount: "$129.99",
-    //           },
-    //           {
-    //             date: "Dec 22, 2025",
-    //             merchant: "Netflix",
-    //             category: "Entertainment",
-    //             amount: "$15.99",
-    //           },
-    //           {
-    //             date: "Dec 22, 2025",
-    //             merchant: "Starbucks",
-    //             category: "Food & Dining",
-    //             amount: "$6.75",
-    //           },
-    //         ].map((expense, idx) => (
-    //           <div
-    //             key={idx}
-    //             className="flex items-center justify-between border-b pb-4 last:border-0 last:pb-0"
-    //           >
-    //             <div className="flex flex-col gap-1">
-    //               <span className="font-medium">{expense.merchant}</span>
-    //               <div className="flex items-center gap-2 text-sm text-muted-foreground">
-    //                 <span>{expense.date}</span>
-    //                 <span>•</span>
-    //                 <span>{expense.category}</span>
-    //               </div>
-    //             </div>
-    //             <span className="font-semibold">{expense.amount}</span>
-    //           </div>
-    //         ))}
-    //       </div>
-    //     </CardContent>
-    //   </Card>
-    // </div>
   );
 }

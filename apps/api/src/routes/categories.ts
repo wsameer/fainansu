@@ -2,7 +2,12 @@ import { Hono } from "hono";
 import { categoriesService } from "../services/categories.service.js";
 import { validate } from "../middleware/validator.js";
 import z from "zod";
-import { CategoryQuerySchema, InsertCategorySchema, UpdateCategorySchema, type ApiResponse } from "@workspace/types";
+import {
+  CategoryQuerySchema,
+  InsertCategorySchema,
+  UpdateCategorySchema,
+  type ApiResponse,
+} from "@workspace/types";
 
 /**
  * Categories Routes
@@ -65,16 +70,21 @@ app.post("/", validate("json", InsertCategorySchema), async (c) => {
  * PUT /api/categories/:id
  * Update an existing category
  */
-app.put("/:id", validate("param", uuidParamSchema), validate("json", UpdateCategorySchema), async (c) => {
-  const { id } = c.req.valid("param");
-  const data = c.req.valid("json");
-  const updatedCategory = await categoriesService.update(id, data);
+app.put(
+  "/:id",
+  validate("param", uuidParamSchema),
+  validate("json", UpdateCategorySchema),
+  async (c) => {
+    const { id } = c.req.valid("param");
+    const data = c.req.valid("json");
+    const updatedCategory = await categoriesService.update(id, data);
 
-  return c.json<ApiResponse<typeof updatedCategory>>({
-    success: true,
-    data: updatedCategory,
-  });
-});
+    return c.json<ApiResponse<typeof updatedCategory>>({
+      success: true,
+      data: updatedCategory,
+    });
+  }
+);
 
 /**
  * DELETE /api/categories/:id

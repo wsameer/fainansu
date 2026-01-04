@@ -1,6 +1,6 @@
-import { useLayoutConfig } from "@/components/layout/layout-provider";
-import { TRANSACTIONS_ROUTE } from "@/constants";
 import { createFileRoute } from "@tanstack/react-router";
+import { useLayoutConfig } from "@/features/layout";
+import { TRANSACTIONS_ROUTE } from "@/constants";
 
 export const Route = createFileRoute(TRANSACTIONS_ROUTE)({
   component: RouteComponent,

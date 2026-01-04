@@ -1,4 +1,13 @@
-import { FileTextIcon, HouseIcon, LandmarkIcon, ScaleIcon, SettingsIcon, WalletCardsIcon } from "lucide-react";
+import {
+  FileTextIcon,
+  HouseIcon,
+  LandmarkIcon,
+  LifeBuoyIcon,
+  MessageCircleQuestionIcon,
+  ScaleIcon,
+  SettingsIcon,
+  WalletCardsIcon,
+} from "lucide-react";
 import {
   ACCOUNTS_ROUTE,
   BUDGET_ROUTE,
@@ -6,10 +15,10 @@ import {
   EXPENSE_CATEGORY_SETTINGS_ROUTE,
   SETTINGS_ROUTE,
   TRANSACTIONS_ROUTE,
-} from "../../constants";
-import type { SideNavigationItem } from "@/components/navigation/types";
+} from "@/constants";
+import type { SideNavigationItem } from "./types";
 
-export const PRIMARY_NAV_OPTIONS = [
+export const PRIMARY_NAV_OPTIONS: SideNavigationItem[] = [
   { icon: HouseIcon, title: "Home", path: DASHBOARD_ROUTE },
   {
     icon: FileTextIcon,
@@ -24,4 +33,9 @@ export const PRIMARY_NAV_OPTIONS = [
   },
   { icon: ScaleIcon, title: "Budget", path: BUDGET_ROUTE },
   { icon: SettingsIcon, title: "Settings", path: SETTINGS_ROUTE },
-].filter(Boolean) as SideNavigationItem[];
+];
+
+export const SECONDARY_NAV_OPTIONS: SideNavigationItem[] = [
+  { icon: MessageCircleQuestionIcon, title: "Feedback", path: "#" },
+  { icon: LifeBuoyIcon, title: "Support", path: "#" },
+];

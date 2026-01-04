@@ -41,6 +41,7 @@ interface State {
   error: Error | null;
 }
 
+// React 19 way of doing things
 export class GlobalErrorBoundary extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
@@ -62,7 +63,9 @@ export class GlobalErrorBoundary extends Component<Props, State> {
 
   render(): ReactNode {
     if (this.state.hasError && this.state.error) {
-      return <ErrorFallback error={this.state.error} resetErrorBoundary={this.resetErrorBoundary} />;
+      return (
+        <ErrorFallback error={this.state.error} resetErrorBoundary={this.resetErrorBoundary} />
+      );
     }
 
     return this.props.children;
