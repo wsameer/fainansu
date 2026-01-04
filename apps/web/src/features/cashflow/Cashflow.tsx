@@ -15,6 +15,7 @@ import {
   SelectValue,
 } from "@workspace/ui/components/select";
 import { useState } from "react";
+import { CashflowChart } from "./components/CashflowChart";
 
 export function Cashflow() {
   const [selectedOption, setSelectedOption] = useState("year");
@@ -55,14 +56,7 @@ export function Cashflow() {
         </CardAction>
       </CardHeader>
       <CardContent>
-        <p>Client requested dashboard redesign with focus on mobile responsiveness.</p>
-        <ol className="mt-4 flex list-decimal flex-col gap-2 pl-6">
-          <li>New analytics widgets for daily/weekly metrics</li>
-          <li>Simplified navigation menu</li>
-          <li>Dark mode support</li>
-          <li>Timeline: 6 weeks</li>
-          <li>Follow-up meeting scheduled for next Tuesday</li>
-        </ol>
+        <CashflowChart />
       </CardContent>
     </Card>
   );

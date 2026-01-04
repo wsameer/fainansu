@@ -46,7 +46,7 @@ export const SettingsNavigation = memo(function SettingsNavigation() {
             <item.icon className="size-4" />
           </ItemMedia>
           <ItemContent>
-            <ItemTitle>{item.label}</ItemTitle>
+            <ItemTitle className="font-normal">{item.label}</ItemTitle>
           </ItemContent>
           <ItemActions>
             <ChevronRightIcon className="size-4" />
