@@ -11,6 +11,7 @@ import {
 } from "@workspace/ui/components/item";
 import { Button } from "@workspace/ui/components/button";
 import { Cashflow } from "@/features/cashflow";
+import { Card } from "@workspace/ui/components/card";
 
 export const Route = createFileRoute(DASHBOARD_ROUTE)({
   component: RouteComponent,
@@ -23,7 +24,7 @@ function RouteComponent() {
 
   return (
     <div>
-      <div className="grid grid-cols-1 gap-2 xl:grid-cols-12">
+      <div className="grid grid-cols-1 gap-4 xl:grid-cols-12">
         {/* 40% column (2 out of 12 columns) */}
         <div className="xl:col-span-4">
           <Item variant="muted">
@@ -50,7 +51,7 @@ function RouteComponent() {
 
         {/* 60% column (10 out of 12 columns) with 3 equal cards */}
         <div className="xl:col-span-8 flex flex-col rounded-md bg-muted/50 border-transparent gap-2.5 px-3 py-2.5">
-          <p className="text-xs">Your year in a glimse</p>
+          <p className="text-xs">Monthly financial rythm</p>
           <div className="grid grid-cols-3 gap-2.5">
             <StatCard title="Income" value="$5,111,250.00" sentiment="Trending up by 5.2%" />
             <StatCard title="Expense" value="$64,778.00" sentiment="Trending down by 1.2%" />
@@ -61,6 +62,12 @@ function RouteComponent() {
         <div className="xl:col-span-8">
           <Cashflow />
         </div>
+
+        <div className="xl:col-span-4">
+          <Card className="mx-auto w-full gap-3"></Card>
+        </div>
+
+        <div className="xl:col-span-8"></div>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { BarChart, Bar, XAxis, CartesianGrid, YAxis, ReferenceLine } from "recharts";
+import { BarChart, Bar, XAxis, CartesianGrid, YAxis } from "recharts";
 import {
   ChartContainer,
   ChartLegend,
@@ -43,6 +43,31 @@ const barChartData = [
     month: "July",
     expense: -3490,
     income: 8300,
+  },
+  {
+    month: "August",
+    expense: -5900,
+    income: 10200,
+  },
+  {
+    month: "September",
+    expense: -6200,
+    income: 13500,
+  },
+  {
+    month: "October",
+    expense: -4500,
+    income: 9800,
+  },
+  {
+    month: "November",
+    expense: -8700,
+    income: 14200,
+  },
+  {
+    month: "December",
+    expense: -5600,
+    income: 11800,
   },
 ];
 
