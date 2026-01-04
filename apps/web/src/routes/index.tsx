@@ -11,7 +11,7 @@ import {
 } from "@workspace/ui/components/item";
 import { Button } from "@workspace/ui/components/button";
 import { Cashflow } from "@/features/cashflow";
-import { Card } from "@workspace/ui/components/card";
+import { SpendingSummaryChart } from "@/features/cashflow/components/SpendingSummaryChart";
 
 export const Route = createFileRoute(DASHBOARD_ROUTE)({
   component: RouteComponent,
@@ -64,7 +64,7 @@ function RouteComponent() {
         </div>
 
         <div className="xl:col-span-4">
-          <Card className="mx-auto w-full gap-3"></Card>
+          <SpendingSummaryChart />
         </div>
 
         <div className="xl:col-span-8"></div>
