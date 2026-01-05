@@ -158,12 +158,8 @@ async function seed() {
 
     // Create subcategories
     const housingCategory = expenseCategories.find((c) => c.name === "Housing");
-    const transportCategory = expenseCategories.find(
-      (c) => c.name === "Transportation",
-    );
-    const foodCategory = expenseCategories.find(
-      (c) => c.name === "Food & Dining",
-    );
+    const transportCategory = expenseCategories.find((c) => c.name === "Transportation");
+    const foodCategory = expenseCategories.find((c) => c.name === "Food & Dining");
 
     if (housingCategory) {
       const housingSubcategories = await db
@@ -200,9 +196,7 @@ async function seed() {
         ])
         .returning();
 
-      console.log(
-        `✅ Created ${housingSubcategories.length} housing subcategories`,
-      );
+      console.log(`✅ Created ${housingSubcategories.length} housing subcategories`);
     }
 
     if (transportCategory) {
@@ -247,9 +241,7 @@ async function seed() {
         ])
         .returning();
 
-      console.log(
-        `✅ Created ${transportSubcategories.length} transportation subcategories`,
-      );
+      console.log(`✅ Created ${transportSubcategories.length} transportation subcategories`);
     }
 
     if (foodCategory) {
@@ -350,7 +342,7 @@ async function seed() {
   - Expense categories: 10
   - Subcategories: ~13
   - Accounts: 4
-    `,
+    `
     );
 
     process.exit(0);

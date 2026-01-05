@@ -21,6 +21,9 @@ export type AccountType = z.infer<typeof AccountTypeEnum>;
 export const TransactionTypeEnum = z.enum(["INCOME", "EXPENSE", "TRANSFER"]);
 export type TransactionType = z.infer<typeof TransactionTypeEnum>;
 
+export const BudgetPeriodEnum = z.enum(["MONTHLY", "QUARTERLY", "YEARLY", "CUSTOM"]);
+export type BudgetPeriod = z.infer<typeof BudgetPeriodEnum>;
+
 // ============================================================================
 // Category Schemas
 // ============================================================================
@@ -174,3 +177,42 @@ export const TransactionQuerySchema = z.object({
 export type CategoryQuery = z.infer<typeof CategoryQuerySchema>;
 export type AccountQuery = z.infer<typeof AccountQuerySchema>;
 export type TransactionQuery = z.infer<typeof TransactionQuerySchema>;
+
+// ============================================================================
+// Budget Schemas
+// ============================================================================
+
+export const BudgetSchema = z.object({
+  id: z.string().uuid(),
+  categoryId: z.string().uuid(),
+  amount: z.number(),
+  period: BudgetPeriodEnum,
+  startDate: z.date(),
+  endDate: z.date().nullable(),
+  isActive: z.boolean().default(true),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+});
+
+export const InsertBudgetSchema = BudgetSchema.omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+}).partial({
+  endDate: true,
+  isActive: true,
+});
+
+export const UpdateBudgetSchema = InsertBudgetSchema.partial();
+
+export type Budget = z.infer<typeof BudgetSchema>;
+export type InsertBudget = z.infer<typeof InsertBudgetSchema>;
+export type UpdateBudget = z.infer<typeof UpdateBudgetSchema>;
+
+export const BudgetQuerySchema = z.object({
+  categoryId: z.string().uuid().optional(),
+  period: BudgetPeriodEnum.optional(),
+  isActive: z.boolean().optional(),
+});
+
+export type BudgetQuery = z.infer<typeof BudgetQuerySchema>;

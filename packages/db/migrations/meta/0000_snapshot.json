@@ -277,12 +277,8 @@
           "name": "transactions_account_id_accounts_id_fk",
           "tableFrom": "transactions",
           "tableTo": "accounts",
-          "columnsFrom": [
-            "account_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["account_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -290,12 +286,8 @@
           "name": "transactions_category_id_categories_id_fk",
           "tableFrom": "transactions",
           "tableTo": "categories",
-          "columnsFrom": [
-            "category_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["category_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -303,12 +295,8 @@
           "name": "transactions_to_account_id_accounts_id_fk",
           "tableFrom": "transactions",
           "tableTo": "accounts",
-          "columnsFrom": [
-            "to_account_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["to_account_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         }
@@ -324,32 +312,17 @@
     "public.account_type": {
       "name": "account_type",
       "schema": "public",
-      "values": [
-        "CHECKING",
-        "SAVINGS",
-        "CREDIT_CARD",
-        "INVESTMENT",
-        "CASH",
-        "LOAN",
-        "OTHER"
-      ]
+      "values": ["CHECKING", "SAVINGS", "CREDIT_CARD", "INVESTMENT", "CASH", "LOAN", "OTHER"]
     },
     "public.category_type": {
       "name": "category_type",
       "schema": "public",
-      "values": [
-        "INCOME",
-        "EXPENSE"
-      ]
+      "values": ["INCOME", "EXPENSE"]
     },
     "public.transaction_type": {
       "name": "transaction_type",
       "schema": "public",
-      "values": [
-        "INCOME",
-        "EXPENSE",
-        "TRANSFER"
-      ]
+      "values": ["INCOME", "EXPENSE", "TRANSFER"]
     }
   },
   "schemas": {},
