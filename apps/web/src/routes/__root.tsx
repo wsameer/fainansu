@@ -1,6 +1,15 @@
+import { lazy, Suspense } from "react";
 import { createRootRouteWithContext, Outlet, useNavigate } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import type { QueryClient } from "@tanstack/react-query";
+
+// Lazy load DevTools only in development
+const TanStackRouterDevtools = import.meta.env.DEV
+  ? lazy(() =>
+      import("@tanstack/react-router-devtools").then((module) => ({
+        default: module.TanStackRouterDevtools,
+      }))
+    )
+  : () => null;
 import { SidebarInset, SidebarProvider } from "@workspace/ui/components/sidebar";
 
 import { Header, SidebarLeft, SidebarRight } from "@/features/layout";
@@ -56,7 +65,9 @@ function RootComponent() {
       <AppBottomBar />
       <SidebarRight />
       {import.meta.env.DEV && (
-        <TanStackRouterDevtools initialIsOpen={false} position="bottom-right" />
+        <Suspense fallback={null}>
+          <TanStackRouterDevtools initialIsOpen={false} position="bottom-right" />
+        </Suspense>
       )}
     </SidebarProvider>
   );

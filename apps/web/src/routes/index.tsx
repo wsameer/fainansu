@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useLayoutConfig } from "@/features/layout";
 import { StatCard } from "@/components/StatCard";
@@ -11,7 +12,13 @@ import {
 } from "@workspace/ui/components/item";
 import { Button } from "@workspace/ui/components/button";
 import { Cashflow } from "@/features/cashflow";
-import { SpendingSummaryChart } from "@/features/cashflow/components/SpendingSummaryChart";
+
+// Lazy load the chart component to reduce initial bundle size
+const SpendingSummaryChart = lazy(() =>
+  import("@/features/cashflow/components/SpendingSummaryChart").then((m) => ({
+    default: m.SpendingSummaryChart,
+  }))
+);
 
 export const Route = createFileRoute(DASHBOARD_ROUTE)({
   component: RouteComponent,
@@ -64,7 +71,11 @@ function RouteComponent() {
         </div>
 
         <div className="xl:col-span-4">
-          <SpendingSummaryChart />
+          <Suspense
+            fallback={<div className="h-[400px] w-full animate-pulse bg-muted rounded-md" />}
+          >
+            <SpendingSummaryChart />
+          </Suspense>
         </div>
 
         <div className="xl:col-span-8"></div>

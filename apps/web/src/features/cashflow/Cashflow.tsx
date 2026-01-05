@@ -1,3 +1,5 @@
+import { lazy, Suspense, useState } from "react";
+import { TrendingUpIcon } from "lucide-react";
 import {
   Card,
   CardAction,
@@ -15,10 +17,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@workspace/ui/components/select";
-import { lazy, useState, Suspense } from "react";
-import { TrendingUpIcon } from "lucide-react";
 
-const CashflowChart = lazy(() => import("./components/CashflowChart").then((m) => ({ default: m.CashflowChart})))
+// Lazy load the chart component to reduce initial bundle size
+const CashflowChart = lazy(() =>
+  import("./components/CashflowChart").then((m) => ({ default: m.CashflowChart }))
+);
 
 export function Cashflow() {
   const [selectedOption, setSelectedOption] = useState("year");
@@ -59,8 +62,8 @@ export function Cashflow() {
         </CardAction>
       </CardHeader>
       <CardContent>
-        <Suspense fallback={<div className="h-[350px] w-full animate-pulse bg-muted rouded-md" />}>
-           <CashflowChart />
+        <Suspense fallback={<div className="h-87.5 w-full animate-pulse bg-muted rounded-md" />}>
+          <CashflowChart />
         </Suspense>
       </CardContent>
       <CardFooter>

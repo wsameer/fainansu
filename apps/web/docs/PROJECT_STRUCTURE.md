@@ -6,6 +6,7 @@
 - **Progressive Disclosure**: Move to shared only when actually shared
 
 # Directory Structure
+
 ```
 apps/web/
 ├── src/
@@ -89,9 +90,9 @@ apps/web/
 
 ```ts
 // features/auth/index.ts
-export { LoginForm } from './components/LoginForm'
-export { useAuth } from './hooks/use-auth'
-export type { User } from './types'
+export { LoginForm } from "./components/LoginForm";
+export { useAuth } from "./hooks/use-auth";
+export type { User } from "./types";
 // Don't re-export everything - only public API
 ```
 
@@ -135,11 +136,11 @@ export type { User } from './types'
 
 ```tsx
 // routes/dashboard.tsx
-import { DashboardPage } from '@/features/dashboard'
+import { DashboardPage } from "@/features/dashboard";
 
-export const Route = createFileRoute('/dashboard')({
+export const Route = createFileRoute("/dashboard")({
   component: DashboardPage,
-})
+});
 ```
 
 ### 5. Stores (`stores/`)
@@ -167,14 +168,14 @@ export const Route = createFileRoute('/dashboard')({
 
 ## Naming Conventions
 
-| Type | Convention | Example |
-|------|------------|---------|
-| Components | PascalCase | `DashboardStatsCard.tsx` |
-| Hooks | `use-*` kebab-case file, `use*` camelCase export | `use-debounce.ts` → `useDebounce` |
-| Stores | `*-store` kebab-case file, `use*Store` export | `ui-store.ts` → `useUiStore` |
-| API hooks | `use-verb-noun` pattern | `use-get-stats.ts`, `use-create-user.ts` |
-| Types | PascalCase | `User`, `DashboardFilter` |
-| Constants | SCREAMING_SNAKE_CASE | `DASHBOARD_ROUTE` |
+| Type       | Convention                                       | Example                                  |
+| ---------- | ------------------------------------------------ | ---------------------------------------- |
+| Components | PascalCase                                       | `DashboardStatsCard.tsx`                 |
+| Hooks      | `use-*` kebab-case file, `use*` camelCase export | `use-debounce.ts` → `useDebounce`        |
+| Stores     | `*-store` kebab-case file, `use*Store` export    | `ui-store.ts` → `useUiStore`             |
+| API hooks  | `use-verb-noun` pattern                          | `use-get-stats.ts`, `use-create-user.ts` |
+| Types      | PascalCase                                       | `User`, `DashboardFilter`                |
+| Constants  | SCREAMING_SNAKE_CASE                             | `DASHBOARD_ROUTE`                        |
 
 ## Cross-Feature Communication
 
@@ -191,18 +192,19 @@ When features need to share data (ESLint rule to enforce this is planned):
 
 ### Where does it go?
 
-| Scenario | Location |
-|----------|----------|
-| Used by 1 feature only | `features/[name]/` |
-| Used by 2+ features + pure UI | `components/` |
-| Used by 2+ features + has logic | `hooks/` or `lib/` |
-| Global UI state | `stores/` |
-| Server state / API calls | `features/[name]/api/` (TanStack Query) |
-| Feature-specific state | `features/[name]/store/` (Zustand) |
+| Scenario                        | Location                                |
+| ------------------------------- | --------------------------------------- |
+| Used by 1 feature only          | `features/[name]/`                      |
+| Used by 2+ features + pure UI   | `components/`                           |
+| Used by 2+ features + has logic | `hooks/` or `lib/`                      |
+| Global UI state                 | `stores/`                               |
+| Server state / API calls        | `features/[name]/api/` (TanStack Query) |
+| Feature-specific state          | `features/[name]/store/` (Zustand)      |
 
 ## Examples
 
 ### Good: Feature with proper separation
+
 ```
 features/dashboard/
 ├── api/
@@ -218,6 +220,7 @@ features/dashboard/
 ```
 
 ### Bad: Mixed responsibilities
+
 ```
 components/
 ├── buttons/              # Don't organize by type
@@ -228,6 +231,7 @@ components/
 ```
 
 ### Good: Flat component structure
+
 ```
 components/
 ├── Button.tsx           # Simple: single file
@@ -238,6 +242,7 @@ components/
 ```
 
 ### Good: Clear state boundaries
+
 ```
 # Global UI state
 stores/ui-store.ts
@@ -250,12 +255,13 @@ features/dashboard/api/use-get-stats.ts
 ```
 
 ### Good: Route-Feature relationship
+
 ```tsx
 // routes/dashboard.tsx - thin orchestrator
-import { createFileRoute } from '@tanstack/react-router'
-import { DashboardPage } from '@/features/dashboard'
+import { createFileRoute } from "@tanstack/react-router";
+import { DashboardPage } from "@/features/dashboard";
 
-export const Route = createFileRoute('/dashboard')({
+export const Route = createFileRoute("/dashboard")({
   component: DashboardPage,
-})
+});
 ```

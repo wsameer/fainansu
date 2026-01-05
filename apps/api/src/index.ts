@@ -13,6 +13,7 @@ import { logger } from "./lib/logger.js";
 import health from "./routes/Health.js";
 import categories from "./routes/categories.js";
 import accounts from "./routes/accounts.js";
+import budget from "./routes/budget.js";
 
 const app = new Hono();
 
@@ -30,6 +31,7 @@ app.use(
 app.route("/api/health", health);
 app.route("/api/categories", categories);
 app.route("/api/accounts", accounts);
+app.route("/api/budget", budget);
 
 // API root endpoint
 app.get("/api", (c) => {
