@@ -15,9 +15,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@workspace/ui/components/select";
-import { useState } from "react";
-import { CashflowChart } from "./components/CashflowChart";
+import { lazy, useState, Suspense } from "react";
 import { TrendingUpIcon } from "lucide-react";
+
+const CashflowChart = lazy(() => import("./components/CashflowChart").then((m) => ({ default: m.CashflowChart})))
 
 export function Cashflow() {
   const [selectedOption, setSelectedOption] = useState("year");
@@ -58,7 +59,9 @@ export function Cashflow() {
         </CardAction>
       </CardHeader>
       <CardContent>
-        <CashflowChart />
+        <Suspense fallback={<div className="h-[350px] w-full animate-pulse bg-muted rouded-md" />}>
+           <CashflowChart />
+        </Suspense>
       </CardContent>
       <CardFooter>
         <p className="flex gap-1 leading-none items-center-safe not-first:mt-6">
