@@ -60,4 +60,31 @@ export default defineConfig({
       },
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: (id) => {
+          // Group all React/TanStack framework code into vendor chunk
+          if (id.includes("node_modules/react") || id.includes("node_modules/@tanstack")) {
+            return "vendor";
+          }
+
+          // Group all @workspace/ui components into ui chunk
+          if (id.includes("packages/ui/src")) {
+            return "ui";
+          }
+
+          // Group all Base UI components into base-ui chunk
+          if (id.includes("node_modules/@base-ui")) {
+            return "base-ui";
+          }
+
+          // Group Recharts separately (it's large)
+          if (id.includes("node_modules/recharts")) {
+            return "recharts";
+          }
+        },
+      },
+    },
+  },
 });
